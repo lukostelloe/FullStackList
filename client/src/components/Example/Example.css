@@ -1,10 +1,19 @@
+.full_app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.headings {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .form {
   display: flex;
   flex-direction: row;
-  align-items: center;
-
-  margin: 100px;
-  margin-top: 50px;
 }
 
 .form_entry {
@@ -16,8 +25,6 @@
   height: 40px;
   width: 500px;
   margin: 2px;
-
-  border: 2px solid black;
 }
 
 .item_description {
@@ -27,13 +34,12 @@
 
 .result {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 
   width: 500px;
 
-  border: 3px solid black;
   border-radius: 5px;
 
   margin: 8px;
@@ -57,7 +63,6 @@ input {
 
 button {
   margin: 10px;
-
   padding: 1.5em 5em;
   background: #efefef;
   border: none;
@@ -86,6 +91,13 @@ button:active {
     inset 2px 2px 4px rgba(0, 0, 0, 0.15);
 }
 
+.info_list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .update_button {
   margin: 10px;
 
@@ -104,4 +116,72 @@ button:active {
   box-shadow: -6px -6px 14px rgba(255, 255, 255, 0.7),
     -6px -6px 10px rgba(255, 255, 255, 0.5),
     6px 6px 8px rgba(255, 255, 255, 0.075), 6px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.tickbuttonOn {
+  margin: 10px;
+  padding: 0.5em 1em;
+
+  background: #aeffb2;
+
+  border: none;
+  border-radius: 0.5rem;
+  color: #444;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, 0.7),
+    -6px -6px 10px rgba(255, 255, 255, 0.5),
+    6px 6px 8px rgba(255, 255, 255, 0.075), 6px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.tickbuttonOff {
+  margin: 10px;
+  padding: 0.5em 1em;
+
+  background: #ffaeae;
+  text-decoration-line: line-through;
+
+  border: none;
+  border-radius: 0.5rem;
+  color: #444;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, 0.7),
+    -6px -6px 10px rgba(255, 255, 255, 0.5),
+    6px 6px 8px rgba(255, 255, 255, 0.075), 6px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.editbutton {
+  margin: 10px;
+
+  padding: 0.5em 1em;
+  background: #efefef;
+  border: none;
+  border-radius: 0.5rem;
+  color: #444;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, 0.7),
+    -6px -6px 10px rgba(255, 255, 255, 0.5),
+    6px 6px 8px rgba(255, 255, 255, 0.075), 6px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.editimage {
+  width: 20px;
+  height: 20px;
 }
