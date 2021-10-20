@@ -11,7 +11,6 @@ function Example() {
   const [newdone, setnewdone] = useState("");
   const [newnumber, setnewnumber] = useState(0);
   const [ticked, setticked] = useState(true);
-
   const [infolist, setinfolist] = useState([]);
 
   useEffect(() => {
@@ -56,6 +55,8 @@ function Example() {
       setticked(false);
     }
   };
+
+  //PROBLEM HERE IS ONCLICK IT IS CHANGING CSS OF ALL THE BUTTONS
 
   const tickedClasses = clsx(
     ticked ? "tickbuttonOn" : "tickbuttonOff",
