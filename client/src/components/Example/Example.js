@@ -3,11 +3,10 @@ import "./Example.css";
 import Axios from "axios";
 
 function Example() {
-  const [day, setday] = useState(0);
+  const [number, setnumber] = useState(0);
   const [done, setdone] = useState("");
-  const [mood, setmood] = useState("");
   const [newdone, setnewdone] = useState("");
-  const [newmood, setnewmood] = useState("");
+  const [newnumber, setnewnumber] = useState(0);
 
   const [infolist, setinfolist] = useState([]);
 
@@ -18,17 +17,10 @@ function Example() {
   }, []);
 
   const addToList = () => {
+    window.location.reload();
     Axios.post("http://localhost:3001/insert", {
-      day: day,
+      number: number,
       done: done,
-      mood: mood,
-    });
-  };
-
-  const updateMood = (id) => {
-    Axios.put("http://localhost:3001/updatemood", {
-      id: id,
-      newmood: newmood,
     });
   };
 
@@ -39,67 +31,86 @@ function Example() {
     });
   };
 
-  const deleteMood = (id) => {
+  const updateNumber = (id) => {
+    Axios.put("http://localhost:3001/updatenumber", {
+      id: id,
+      newnumber: newnumber,
+    });
+  };
+
+  const deleteId = (id) => {
+    window.location.reload();
     Axios.delete(`http://localhost:3001/delete/${id}`);
   };
 
   return (
     <div className="form">
-      <h1>Shopping List</h1>
-      <input
-        className="form_input"
-        type="number"
-        placeholder="what number day is it"
-        onChange={(e) => {
-          setday(e.target.value);
-        }}
-      />
-      <input
-        className="form_input"
-        type="text"
-        placeholder="what I did today"
-        onChange={(e) => {
-          setdone(e.target.value);
-        }}
-      />
-      <input
-        className="form_input"
-        type="text"
-        placeholder="how my mood is after coding today"
-        onChange={(e) => {
-          setmood(e.target.value);
-        }}
-      />
-      <button onClick={addToList}>Add to list</button>
+      <div className="form_entry">
+        <h1>Shopping List</h1>
+        <input
+          className="form_input"
+          type="text"
+          placeholder="item needed"
+          onChange={(e) => {
+            setdone(e.target.value);
+          }}
+        />
+        <input
+          className="form_input"
+          type="number"
+          placeholder="quantity"
+          onChange={(e) => {
+            setnumber(e.target.value);
+          }}
+        />
 
-      <h1>My List</h1>
+        <button onClick={addToList}>Add to list</button>
+      </div>
 
-      {infolist.map((val, key) => {
-        return (
-          <div key={key} className="result">
-            <h4>Day: {val.day}</h4>
-            <h4>Done: {val.done}</h4>
-            <input
-              type="text"
-              placeholder="new done"
-              onChange={(e) => {
-                setnewdone(e.target.value);
-              }}
-            />
-            <button onClick={() => updateDone(val._id)}>Update Done</button>
-            <h4>Mood: {val.mood}</h4>
-            <input
-              type="text"
-              placeholder="new mood"
-              onChange={(e) => {
-                setnewmood(e.target.value);
-              }}
-            />
-            <button onClick={() => updateMood(val._id)}>Update Mood</button>
-            <button onClick={() => deleteMood(val._id)}>Delete Entry</button>
-          </div>
-        );
-      })}
+      <div>
+        {infolist.map((val, key) => {
+          return (
+            <div key={key} className="result">
+              <div className="item_description">
+                <h3>{val.done}</h3>
+                <h3>({val.number})</h3>
+              </div>
+              <input
+                type="text"
+                placeholder="edit item"
+                onChange={(e) => {
+                  setnewdone(e.target.value);
+                }}
+              />
+              <button
+                className="update_button"
+                onClick={() => updateDone(val._id)}
+              >
+                Update item
+              </button>
+              <input
+                type="number"
+                placeholder="change number"
+                onChange={(e) => {
+                  setnewnumber(e.target.value);
+                }}
+              />
+              <button
+                className="update_button"
+                onClick={() => updateNumber(val._id)}
+              >
+                Update number
+              </button>
+              <button
+                className="update_button"
+                onClick={() => deleteId(val._id)}
+              >
+                Delete
+              </button>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -1,16 +1,12 @@
 const mongoose = require("mongoose");
 
 const mySchema = new mongoose.Schema({
-  day: {
-    type: Number,
-    required: true,
-  },
   done: {
     type: String,
     required: true,
   },
-  mood: {
-    type: String,
+  number: {
+    type: Number,
     required: true,
   },
 });

@@ -16,11 +16,10 @@ mongoose.connect(
 );
 
 app.post("/insert", async (req, res) => {
-  const days = req.body.day;
+  const numbers = req.body.number;
   const dones = req.body.done;
-  const moods = req.body.mood;
 
-  const summary = new summaryModel({ day: days, done: dones, mood: moods });
+  const summary = new summaryModel({ number: numbers, done: dones });
 
   try {
     await summary.save();
@@ -39,21 +38,6 @@ app.get("/read", async (req, res) => {
   });
 });
 
-app.put("/updatemood", async (req, res) => {
-  const newmood = req.body.newmood;
-  const id = req.body.id;
-
-  try {
-    await summaryModel.findById(id, (err, updatedMood) => {
-      updatedMood.mood = newmood;
-      updatedMood.save();
-      res.send("update");
-    });
-  } catch (err) {
-    console.log(err);
-  }
-});
-
 app.put("/updatedone", async (req, res) => {
   const newdone = req.body.newdone;
   const id = req.body.id;
@@ -62,6 +46,21 @@ app.put("/updatedone", async (req, res) => {
     await summaryModel.findById(id, (err, updatedDone) => {
       updatedDone.done = newdone;
       updatedDone.save();
+      res.send("update");
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.put("/updatenumber", async (req, res) => {
+  const newnumber = req.body.newnumber;
+  const id = req.body.id;
+
+  try {
+    await summaryModel.findById(id, (err, updatedNumber) => {
+      updatedNumber.number = newnumber;
+      updatedNumber.save();
       res.send("update");
     });
   } catch (err) {
