@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import "./Example.css";
 import Axios from "axios";
+import clsx from "clsx";
 import editimage from "../images/edit.png";
 import binimage from "../images/bin.png";
 
@@ -9,6 +10,7 @@ function Example() {
   const [done, setdone] = useState("");
   const [newdone, setnewdone] = useState("");
   const [newnumber, setnewnumber] = useState(0);
+  const [ticked, setticked] = useState(true);
 
   const [infolist, setinfolist] = useState([]);
 
@@ -47,6 +49,19 @@ function Example() {
     Axios.delete(`http://localhost:3001/delete/${id}`);
   };
 
+  const toggleTickOnOff = () => {
+    if (ticked === false) {
+      setticked(true);
+    } else if (ticked === true) {
+      setticked(false);
+    }
+  };
+
+  const tickedClasses = clsx(
+    ticked ? "tickbuttonOn" : "tickbuttonOff",
+    "tickbutton"
+  );
+
   return (
     <div className="full_app">
       <h1>Shopping List</h1>
@@ -81,7 +96,7 @@ function Example() {
           {infolist.map((val, key) => {
             return (
               <div key={key} className="info_list">
-                <button className="tickbuttonOn">
+                <button className={tickedClasses} onClick={toggleTickOnOff}>
                   {val.done}...{val.number}
                 </button>
                 <button className="editbutton">
