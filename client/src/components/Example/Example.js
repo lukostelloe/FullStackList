@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 import "./Example.css";
+import Modal from "../Modal/Modal";
 import Axios from "axios";
 import clsx from "clsx";
 import editimage from "../images/edit.png";
@@ -12,6 +13,7 @@ function Example() {
   const [newnumber, setnewnumber] = useState(0);
   const [ticked, setticked] = useState(true);
   const [infolist, setinfolist] = useState([]);
+  const [openmodal, setopenmodal] = useState(false);
 
   useEffect(() => {
     Axios.get("http://localhost:3001/read").then((response) => {
@@ -19,12 +21,20 @@ function Example() {
     });
   }, []);
 
-  const addToList = () => {
-    window.location.reload();
-    Axios.post("http://localhost:3001/insert", {
-      number: number,
-      done: done,
-    });
+  const addToList = async () => {
+    //window.location.reload();
+    try {
+      const response = await Axios.post("http://localhost:3001/insert", {
+        number: number,
+        done: done,
+      });
+
+      setinfolist([...infolist, response.data]);
+    } catch (error) {
+      // deal with the error
+    }
+
+    // update component state
   };
 
   const updateDone = (id) => {
@@ -46,6 +56,7 @@ function Example() {
   const deleteId = (id) => {
     window.location.reload();
     Axios.delete(`http://localhost:3001/delete/${id}`);
+    // filter deleted item
   };
 
   const toggleTickOnOff = () => {
@@ -90,72 +101,73 @@ function Example() {
             }}
           />
 
-          <button onClick={addToList}>Add</button>
+          <button className="add_button" type="button" onClick={addToList}>
+            Add
+          </button>
         </form>
 
         <div>
-          {infolist.map((val, key) => {
+          {infolist.map((val) => {
             return (
-              <div key={key} className="info_list">
+              <div key={val._id} className="info_list">
                 <button className={tickedClasses} onClick={toggleTickOnOff}>
                   {val.done}...{val.number}
                 </button>
-                <button className="editbutton">
+                <button
+                  className="edit_button"
+                  onClick={() => setopenmodal(val._id)}
+                >
                   <img className="editimage" src={editimage} alt="edit" />
                 </button>
+                {openmodal === val._id && (
+                  <Modal closeModal={setopenmodal}>
+                    <div>
+                      <div className="item_description">
+                        <h3>{val.done}</h3>
+                        <h3>({val.number})</h3>
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="edit item"
+                        onChange={(e) => {
+                          setnewdone(e.target.value);
+                        }}
+                      />
+                      <button
+                        className="update_button"
+                        onClick={() => updateDone(val._id)}
+                      >
+                        Update
+                      </button>
+                      <input
+                        type="number"
+                        placeholder="change number"
+                        onChange={(e) => {
+                          setnewnumber(e.target.value);
+                        }}
+                      />
+                      <button
+                        className="update_button"
+                        onClick={() => updateNumber(val._id)}
+                      >
+                        Update
+                      </button>
+                      {/* <button
+                        className="update_button"
+                        onClick={() => deleteId(val._id)}
+                      >
+                        Delete
+                      </button> */}
+                    </div>
+                  </Modal>
+                )}
+
                 <button
-                  className="editbutton"
+                  className="bin_button"
                   onClick={() => deleteId(val._id)}
                 >
                   <img className="editimage" src={binimage} alt="edit" />
                 </button>
-              </div>
-            );
-          })}
-        </div>
-
-        <div>
-          {infolist.map((val, key) => {
-            return (
-              <div key={key} className="result">
-                <div>
-                  <div className="item_description">
-                    <h3>{val.done}</h3>
-                    <h3>({val.number})</h3>
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="edit item"
-                    onChange={(e) => {
-                      setnewdone(e.target.value);
-                    }}
-                  />
-                  <button
-                    className="update_button"
-                    onClick={() => updateDone(val._id)}
-                  >
-                    Update
-                  </button>
-                  <input
-                    type="number"
-                    placeholder="change number"
-                    onChange={(e) => {
-                      setnewnumber(e.target.value);
-                    }}
-                  />
-                  <button
-                    className="update_button"
-                    onClick={() => updateNumber(val._id)}
-                  >
-                    Update
-                  </button>
-                  <button
-                    className="update_button"
-                    onClick={() => deleteId(val._id)}
-                  >
-                    Delete
-                  </button>
-                </div>
               </div>
             );
           })}

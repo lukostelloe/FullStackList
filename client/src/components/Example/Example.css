@@ -91,6 +91,18 @@ button:active {
     inset 2px 2px 4px rgba(0, 0, 0, 0.15);
 }
 
+.add_button {
+  background: #24cfaa;
+}
+
+.add_button:hover {
+  background: #2fdbb6;
+}
+
+.add_button:active {
+  background: #1da88a;
+}
+
 .info_list {
   display: flex;
   flex-direction: row;
@@ -146,11 +158,31 @@ button:active {
   text-decoration-line: line-through;
 }
 
-.editbutton {
+.edit_button {
   margin: 10px;
 
   padding: 0.5em 1em;
   background: #efefef;
+  border: none;
+  border-radius: 0.5rem;
+  color: #444;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, 0.7),
+    -6px -6px 10px rgba(255, 255, 255, 0.5),
+    6px 6px 8px rgba(255, 255, 255, 0.075), 6px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.bin_button {
+  margin: 10px;
+
+  padding: 0.5em 1em;
+  background: #ff6c6c;
   border: none;
   border-radius: 0.5rem;
   color: #444;

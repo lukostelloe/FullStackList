@@ -23,7 +23,7 @@ app.post("/insert", async (req, res) => {
 
   try {
     await summary.save();
-    res.send("inserted data");
+    res.send(summary);
   } catch (err) {
     console.log(err);
   }
