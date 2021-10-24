@@ -1,3 +1,11 @@
+.link {
+  display: block;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
 ul {
   /* POSITION FIXED FOR THE NAVBAR WILL MAKE ELEMENTS HIDE BEHIND IT */
   /* position: fixed; */

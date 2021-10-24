@@ -10,6 +10,8 @@ function Login() {
     setusername(e.target.value);
     setpassword(e.target.value);
     console.log({ username }, { password });
+
+    //if username and password exists, send to list page
   };
 
   return (

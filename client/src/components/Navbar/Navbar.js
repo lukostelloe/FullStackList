@@ -7,14 +7,14 @@ function Navbar() {
     <div>
       <div>
         <ul>
-          <Link to="/list">
-            <li>List</li>
-          </Link>
-          <Link to="/login">
+          <Link to="/login" className="link">
             <li>Login</li>
           </Link>
-          <Link to="/createacc">
+          <Link to="/createacc" className="link">
             <li>Create Account</li>
+          </Link>
+          <Link to="/list" className="link">
+            <li>List</li>
           </Link>
         </ul>
       </div>

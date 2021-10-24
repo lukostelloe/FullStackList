@@ -11,7 +11,7 @@ function List() {
   const [done, setdone] = useState("");
   const [newdone, setnewdone] = useState("");
   const [newnumber, setnewnumber] = useState(0);
-  const [ticked, setticked] = useState(true);
+  // const [ticked, setticked] = useState(true);
   const [infolist, setinfolist] = useState([]);
   const [openmodal, setopenmodal] = useState(false);
 
@@ -28,7 +28,6 @@ function List() {
         number: number,
         done: done,
       });
-
       setinfolist([...infolist, response.data]);
     } catch (error) {
       console.log("there is an error with addToList function");
@@ -37,12 +36,28 @@ function List() {
     // update component state
   };
 
-  const updateDone = (id) => {
-    window.location.reload();
-    Axios.put("http://localhost:3001/updatedone", {
-      id: id,
-      newdone: newdone,
-    });
+  // const updateDone = (id) => {
+  //   window.location.reload();
+  //   Axios.put("http://localhost:3001/updatedone", {
+  //     id: id,
+  //     newdone: newdone,
+  //   });
+  // };
+
+  const updateDone = async (id) => {
+    //window.location.reload();
+    try {
+      const response = await Axios.put("http://localhost:3001/updatedone", {
+        id: id,
+        newdone: newdone,
+      });
+      console.log(response.data);
+      setnewdone([response.data]);
+    } catch (error) {
+      console.log("there is an error with updateDone function");
+    }
+
+    // update component state
   };
 
   const updateNumber = (id) => {
@@ -59,18 +74,24 @@ function List() {
     // filter deleted item
   };
 
-  const toggleTickOnOff = () => {
-    if (ticked === false) {
-      setticked(true);
-    } else if (ticked === true) {
-      setticked(false);
+  const toggleTickOnOff = (e) => {
+    // if (ticked === false) {
+    //   setticked(true);
+    // } else if (ticked === true) {
+    //   setticked(false);
+    // }
+
+    if (e.target.className === "tickbuttonOn") {
+      e.target.className = "tickbuttonOff";
+    } else {
+      e.target.className = "tickbuttonOn";
     }
   };
 
-  const tickedClasses = clsx(
-    ticked ? "tickbuttonOn" : "tickbuttonOff",
-    "tickbutton"
-  );
+  // const tickedClasses = clsx(
+  //   ticked ? "tickbuttonOn" : "tickbuttonOff",
+  //   "tickbutton"
+  // );
 
   //PROBLEM HERE IS ONCLICK IT IS CHANGING CSS OF ALL THE BUTTONS
 
@@ -104,10 +125,8 @@ function List() {
           {infolist.map((val) => {
             return (
               <div key={val._id} className="info_list">
-                <button className={tickedClasses} onClick={toggleTickOnOff}>
-                  <h4>
-                    {val.done}...{val.number}
-                  </h4>
+                <button className="tickbuttonOn" onClick={toggleTickOnOff}>
+                  {val.done}...{val.number}
                 </button>
                 <div>
                   <button

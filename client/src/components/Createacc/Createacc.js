@@ -16,6 +16,8 @@ function Createacc() {
     if (password !== cpassword) {
       console.log("passwords don't match!");
     }
+
+    //if all is good, send details to user and pass database
   };
 
   return (
