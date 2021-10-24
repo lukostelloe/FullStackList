@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import "./List.css";
 import Modal from "../Modal/Modal";
 import Axios from "axios";
-import clsx from "clsx";
+// import clsx from "clsx";
 import editimage from "../images/edit.png";
 import binimage from "../images/bin.png";
 
