@@ -109,19 +109,21 @@ function Example() {
                     {val.done}...{val.number}
                   </h4>
                 </button>
-                <button
-                  className="edit_button"
-                  onClick={() => setopenmodal(val._id)}
-                >
-                  <img className="editimage" src={editimage} alt="edit" />
-                </button>
+                <div>
+                  <button
+                    className="edit_button"
+                    onClick={() => setopenmodal(val._id)}
+                  >
+                    <img className="editimage" src={editimage} alt="edit" />
+                  </button>
 
-                <button
-                  className="bin_button"
-                  onClick={() => deleteId(val._id)}
-                >
-                  <img className="editimage" src={binimage} alt="edit" />
-                </button>
+                  <button
+                    className="bin_button"
+                    onClick={() => deleteId(val._id)}
+                  >
+                    <img className="editimage" src={binimage} alt="edit" />
+                  </button>
+                </div>
                 {openmodal === val._id && (
                   <Modal>
                     <div>
