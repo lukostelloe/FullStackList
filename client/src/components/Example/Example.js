@@ -31,7 +31,7 @@ function Example() {
 
       setinfolist([...infolist, response.data]);
     } catch (error) {
-      // deal with the error
+      console.log("there is an error with addToList function");
     }
 
     // update component state
@@ -67,23 +67,18 @@ function Example() {
     }
   };
 
-  //PROBLEM HERE IS ONCLICK IT IS CHANGING CSS OF ALL THE BUTTONS
-
   const tickedClasses = clsx(
     ticked ? "tickbuttonOn" : "tickbuttonOff",
     "tickbutton"
   );
 
+  //PROBLEM HERE IS ONCLICK IT IS CHANGING CSS OF ALL THE BUTTONS
+
   return (
     <div className="full_app">
       <h1>Shopping List</h1>
-      <div className="headings">
-        <h2>Add</h2>
-        <h2>Edit</h2>
-        <h2>List</h2>
-      </div>
-      <div className="form">
-        <form className="form_entry">
+      <div className="entry_and_form">
+        <form className="form">
           <input
             className="form_input"
             type="text"
@@ -100,7 +95,6 @@ function Example() {
               setnumber(e.target.value);
             }}
           />
-
           <button className="add_button" type="button" onClick={addToList}>
             Add
           </button>
@@ -111,7 +105,9 @@ function Example() {
             return (
               <div key={val._id} className="info_list">
                 <button className={tickedClasses} onClick={toggleTickOnOff}>
-                  {val.done}...{val.number}
+                  <h4>
+                    {val.done}...{val.number}
+                  </h4>
                 </button>
                 <button
                   className="edit_button"
@@ -119,12 +115,26 @@ function Example() {
                 >
                   <img className="editimage" src={editimage} alt="edit" />
                 </button>
+
+                <button
+                  className="bin_button"
+                  onClick={() => deleteId(val._id)}
+                >
+                  <img className="editimage" src={binimage} alt="edit" />
+                </button>
                 {openmodal === val._id && (
-                  <Modal closeModal={setopenmodal}>
+                  <Modal>
                     <div>
                       <div className="item_description">
-                        <h3>{val.done}</h3>
-                        <h3>({val.number})</h3>
+                        <h2>{val.done}</h2>
+                        <h2>({val.number})</h2>
+                        <button
+                          className="close_button"
+                          onClick={() => setopenmodal(false)}
+                        >
+                          {" "}
+                          X{" "}
+                        </button>
                       </div>
                       <input
                         type="text"
@@ -152,22 +162,9 @@ function Example() {
                       >
                         Update
                       </button>
-                      {/* <button
-                        className="update_button"
-                        onClick={() => deleteId(val._id)}
-                      >
-                        Delete
-                      </button> */}
                     </div>
                   </Modal>
                 )}
-
-                <button
-                  className="bin_button"
-                  onClick={() => deleteId(val._id)}
-                >
-                  <img className="editimage" src={binimage} alt="edit" />
-                </button>
               </div>
             );
           })}

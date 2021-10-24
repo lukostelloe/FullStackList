@@ -1,3 +1,8 @@
+.result {
+  display: flex;
+  flex-direction: column;
+}
+
 .close_button {
   margin: 10px;
 

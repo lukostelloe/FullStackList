@@ -5,26 +5,31 @@
   align-items: center;
 }
 
-.headings {
+.entry_and_form {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
 
 .form {
   display: flex;
-  flex-direction: row;
-}
-
-.form_entry {
-  display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .form_input {
   height: 40px;
-  width: 500px;
-  margin: 2px;
+  width: 80%;
+  margin: 5px;
+}
+
+.info_list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  margin: 5px;
 }
 
 .item_description {
@@ -38,23 +43,17 @@
   justify-content: center;
   align-items: center;
 
-  width: 500px;
+  width: 100%;
 
   border-radius: 5px;
 
-  margin: 8px;
-  padding: 10px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 5px;
+  padding: 5px;
 }
 
 input {
   height: 30px;
-  width: 300px;
+  width: 100%;
 }
 
 ::placeholder {
@@ -101,13 +100,6 @@ button:active {
 
 .add_button:active {
   background: #1da88a;
-}
-
-.info_list {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 }
 
 .update_button {
@@ -201,4 +193,17 @@ button:active {
 .editimage {
   width: 20px;
   height: 20px;
+}
+
+@media (max-width: 600px) {
+  .entry_and_form {
+    display: flex;
+    flex-direction: column;
+  }
+  .info_list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
 }
