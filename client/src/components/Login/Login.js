@@ -7,6 +7,7 @@ function Login() {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const [userdetails, setuserdetails] = useState("");
+  const [warning, setwarning] = useState(false);
   let history = useHistory();
 
   useEffect(() => {
@@ -29,7 +30,8 @@ function Login() {
         history.push("/list");
       } else {
         console.log("no match at all");
-        e.target.className = "loginerror";
+        // e.target.className = "loginerror";
+        setwarning(true);
       }
     }
   };
@@ -56,6 +58,9 @@ function Login() {
         <Link to="/createacc">
           <li>Don't have an account?</li>
         </Link>
+        <p className={warning ? "warningOn" : "warningOff"}>
+          Please enter a valid username/password!
+        </p>
       </form>
     </div>
   );

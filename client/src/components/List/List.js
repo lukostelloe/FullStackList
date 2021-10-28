@@ -42,7 +42,6 @@ function List() {
   };
 
   const updateDone = async (id) => {
-    //window.location.reload();
     try {
       const response = await Axios.put("http://localhost:3001/updatedone", {
         id: id,

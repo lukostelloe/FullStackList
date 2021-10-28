@@ -19,3 +19,12 @@
 .loginerror {
   background-color: red;
 }
+
+.warningOn {
+  display: block;
+  color: red;
+}
+
+.warningOff {
+  display: none;
+}
