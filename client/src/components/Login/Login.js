@@ -40,7 +40,7 @@ function Login() {
     <div className="login_div">
       <div className="login_container">
         <h2>SupaList</h2>
-        <h2>Login to your favourite shopping app</h2>
+        <h2>Log in to your favourite shopping app</h2>
         <form className="login_form">
           <input
             type="text"
