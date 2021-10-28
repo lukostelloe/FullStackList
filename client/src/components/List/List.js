@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import "./List.css";
 import Modal from "../Modal/Modal";
 import Axios from "axios";
-// import clsx from "clsx";
+
 import editimage from "../images/edit.png";
 import binimage from "../images/bin.png";
 
@@ -11,7 +11,6 @@ function List() {
   const [done, setdone] = useState("");
   const [newdone, setnewdone] = useState("");
   const [newnumber, setnewnumber] = useState(0);
-  // const [ticked, setticked] = useState(true);
   const [infolist, setinfolist] = useState([]);
   const [openmodal, setopenmodal] = useState(false);
 
@@ -22,7 +21,6 @@ function List() {
   }, []);
 
   const addToList = async () => {
-    //window.location.reload();
     try {
       const response = await Axios.post("http://localhost:3001/insert", {
         number: number,
@@ -35,14 +33,6 @@ function List() {
 
     // update component state
   };
-
-  // const updateDone = (id) => {
-  //   window.location.reload();
-  //   Axios.put("http://localhost:3001/updatedone", {
-  //     id: id,
-  //     newdone: newdone,
-  //   });
-  // };
 
   const updateDone = async (id) => {
     //window.location.reload();
@@ -75,25 +65,12 @@ function List() {
   };
 
   const toggleTickOnOff = (e) => {
-    // if (ticked === false) {
-    //   setticked(true);
-    // } else if (ticked === true) {
-    //   setticked(false);
-    // }
-
     if (e.target.className === "tickbuttonOn") {
       e.target.className = "tickbuttonOff";
     } else {
       e.target.className = "tickbuttonOn";
     }
   };
-
-  // const tickedClasses = clsx(
-  //   ticked ? "tickbuttonOn" : "tickbuttonOff",
-  //   "tickbutton"
-  // );
-
-  //PROBLEM HERE IS ONCLICK IT IS CHANGING CSS OF ALL THE BUTTONS
 
   return (
     <div className="full_app">

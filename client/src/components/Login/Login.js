@@ -1,17 +1,31 @@
 import { React, useState } from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";
+import Axios from "axios";
 
 function Login() {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
+  const [userlist, setuserlist] = useState([]);
 
-  const handleSubmit = (e) => {
-    setusername(e.target.value);
-    setpassword(e.target.value);
-    console.log({ username }, { password });
+  // const handleSubmit = (e) => {
+  //   setusername(e.target.value);
+  //   setpassword(e.target.value);
+  //   console.log({ username }, { password });
+  // };
 
-    //if username and password exists, send to list page
+  const addToList = async () => {
+    try {
+      const response = await Axios.post("http://localhost:3001/insertlogin", {
+        username: username,
+        password: password,
+      });
+      setuserlist([...userlist, response.data]);
+    } catch (error) {
+      console.log("there is an error with addToList function");
+    }
+
+    // update component state
   };
 
   return (
@@ -25,12 +39,12 @@ function Login() {
           onChange={(e) => setusername(e.target.value)}
         ></input>
         <input
-          type="text"
+          type="password"
           placeholder="password"
           value={password}
           onChange={(e) => setpassword(e.target.value)}
         ></input>
-        <button type="button" onClick={handleSubmit}>
+        <button type="button" onClick={addToList}>
           Log In
         </button>
         <Link to="/createacc">

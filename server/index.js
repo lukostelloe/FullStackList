@@ -4,6 +4,7 @@ const cors = require("cors");
 const app = express();
 
 const summaryModel = require("./models/Shoppinglist");
+const loginModel = require("./models/Loginform");
 
 app.use(express.json());
 app.use(cors());
@@ -14,6 +15,8 @@ mongoose.connect(
     useNewUrlParser: true,
   }
 );
+
+//CREATE
 
 app.post("/insert", async (req, res) => {
   const numbers = req.body.number;
@@ -29,6 +32,22 @@ app.post("/insert", async (req, res) => {
   }
 });
 
+app.post("/insertlogin", async (req, res) => {
+  const users = req.body.username;
+  const passwords = req.body.password;
+
+  const summarylogin = new loginModel({ username: users, password: passwords });
+
+  try {
+    await summarylogin.save();
+    res.send(summarylogin);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+//READ
+
 app.get("/read", async (req, res) => {
   summaryModel.find({}, (err, result) => {
     if (err) {
@@ -37,6 +56,8 @@ app.get("/read", async (req, res) => {
     res.send(result);
   });
 });
+
+//UPDATE
 
 app.put("/updatedone", async (req, res) => {
   const newdone = req.body.newdone;
@@ -67,6 +88,8 @@ app.put("/updatenumber", async (req, res) => {
     console.log(err);
   }
 });
+
+//DELETE
 
 app.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
