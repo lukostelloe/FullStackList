@@ -11,3 +11,11 @@
   justify-content: center;
   align-items: center;
 }
+
+.loginbutton {
+  background-color: rgb(98, 255, 98);
+}
+
+.loginerror {
+  background-color: red;
+}

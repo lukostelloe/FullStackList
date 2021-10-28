@@ -1,51 +1,54 @@
 import { React, useState } from "react";
 import "./Createacc.css";
 import { Link } from "react-router-dom";
+import Axios from "axios";
 
 function Createacc() {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
-  const [cpassword, setcpassword] = useState("");
+  const [confpass, setconfpass] = useState("");
+  const [userlist, setuserlist] = useState([]);
 
-  const handleSubmit = (e) => {
-    setusername(e.target.value);
-    setpassword(e.target.value);
-    setcpassword(e.target.value);
-    console.log({ username }, { password }, { cpassword });
-
-    if (password !== cpassword) {
-      console.log("passwords don't match!");
+  const addToList = async () => {
+    if (password === confpass) {
+      try {
+        const response = await Axios.post("http://localhost:3001/insertlogin", {
+          username: username,
+          password: password,
+        });
+        setuserlist([...userlist, response.data]);
+        console.log("account created!");
+      } catch (error) {
+        console.log("there is an error with addToList function");
+      }
+    } else {
+      console.log("pass and conf don't match");
     }
-
-    //if all is good, send details to user and pass database
   };
 
   return (
     <div className="login_div">
       <h2>Create Account</h2>
       <form className="login_form">
-        <label htmlFor="username"> Create Username</label>
         <input
           type="text"
           placeholder="username"
           value={username}
           onChange={(e) => setusername(e.target.value)}
         ></input>
-        <label htmlFor="password">Create Password</label>
         <input
           type="text"
           placeholder="password"
           value={password}
           onChange={(e) => setpassword(e.target.value)}
         ></input>
-        <label htmlFor="confirm-password">Confirm Password</label>
         <input
           type="text"
           placeholder="confirm password"
-          value={cpassword}
-          onChange={(e) => setcpassword(e.target.value)}
+          value={confpass}
+          onChange={(e) => setconfpass(e.target.value)}
         ></input>
-        <button type="button" onClick={handleSubmit}>
+        <button type="button" onClick={addToList}>
           Create Account
         </button>
         <Link to="/login">

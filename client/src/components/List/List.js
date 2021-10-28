@@ -12,11 +12,18 @@ function List() {
   const [newdone, setnewdone] = useState("");
   const [newnumber, setnewnumber] = useState(0);
   const [infolist, setinfolist] = useState([]);
+  const [logindetails, setlogindetails] = useState([]);
   const [openmodal, setopenmodal] = useState(false);
 
   useEffect(() => {
     Axios.get("http://localhost:3001/read").then((response) => {
       setinfolist(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/readlogin").then((response) => {
+      setlogindetails(response.data);
     });
   }, []);
 
@@ -74,7 +81,10 @@ function List() {
 
   return (
     <div className="full_app">
-      <h1>Shopping List</h1>
+      {logindetails.map((val) => {
+        return <div key={val.username}>Welcome {val.username}</div>;
+      })}
+
       <div className="entry_and_form">
         <form className="form">
           <input

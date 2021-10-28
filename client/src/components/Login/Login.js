@@ -1,31 +1,37 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import "./Login.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
 
 function Login() {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
-  const [userlist, setuserlist] = useState([]);
+  const [userdetails, setuserdetails] = useState("");
+  let history = useHistory();
 
-  // const handleSubmit = (e) => {
-  //   setusername(e.target.value);
-  //   setpassword(e.target.value);
-  //   console.log({ username }, { password });
-  // };
+  useEffect(() => {
+    Axios.get("http://localhost:3001/readlogin").then((response) => {
+      setuserdetails(response.data);
+    });
+  }, []);
 
-  const addToList = async () => {
-    try {
-      const response = await Axios.post("http://localhost:3001/insertlogin", {
-        username: username,
-        password: password,
-      });
-      setuserlist([...userlist, response.data]);
-    } catch (error) {
-      console.log("there is an error with addToList function");
+  const checkAndLogin = (e) => {
+    console.log(username);
+    console.log(password);
+    console.log(userdetails);
+
+    for (let i = 0; i < userdetails.length; i++) {
+      if (
+        userdetails[i].username === username &&
+        userdetails[i].password === password
+      ) {
+        console.log("username and password match");
+        history.push("/list");
+      } else {
+        console.log("no match at all");
+        e.target.className = "loginerror";
+      }
     }
-
-    // update component state
   };
 
   return (
@@ -44,7 +50,7 @@ function Login() {
           value={password}
           onChange={(e) => setpassword(e.target.value)}
         ></input>
-        <button type="button" onClick={addToList}>
+        <button type="button" className="loginbutton" onClick={checkAndLogin}>
           Log In
         </button>
         <Link to="/createacc">

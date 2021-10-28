@@ -57,6 +57,15 @@ app.get("/read", async (req, res) => {
   });
 });
 
+app.get("/readlogin", async (req, res) => {
+  loginModel.find({}, (err, result) => {
+    if (err) {
+      res.send(err);
+    }
+    res.send(result);
+  });
+});
+
 //UPDATE
 
 app.put("/updatedone", async (req, res) => {
