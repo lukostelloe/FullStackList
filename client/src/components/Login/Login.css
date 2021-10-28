@@ -1,19 +1,28 @@
 .login_div {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
+  height: 100vh;
+
+  background-image: url(../images/loginpage.jpg);
+  background-size: cover;
 }
 
 .login_form {
   display: flex;
   flex-direction: column;
+}
+
+.login_container {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .loginbutton {
-  background-color: rgb(98, 255, 98);
+  background-color: rgb(63, 248, 63);
 }
 
 .loginerror {

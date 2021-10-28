@@ -80,10 +80,6 @@ function List() {
 
   return (
     <div className="full_app">
-      {logindetails.map((val) => {
-        return <div key={val.username}>Welcome {val.username}</div>;
-      })}
-
       <div className="entry_and_form">
         <form className="form">
           <input

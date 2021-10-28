@@ -3,11 +3,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+
+  background-image: url(../images/listpage.jpg);
+  background-size: cover;
 }
 
 .entry_and_form {
   display: flex;
   flex-direction: row;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .form {

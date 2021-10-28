@@ -38,30 +38,33 @@ function Login() {
 
   return (
     <div className="login_div">
-      <h2>Login</h2>
-      <form className="login_form">
-        <input
-          type="text"
-          placeholder="username"
-          value={username}
-          onChange={(e) => setusername(e.target.value)}
-        ></input>
-        <input
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => setpassword(e.target.value)}
-        ></input>
-        <button type="button" className="loginbutton" onClick={checkAndLogin}>
-          Log In
-        </button>
-        <Link to="/createacc">
-          <li>Don't have an account?</li>
-        </Link>
-        <p className={warning ? "warningOn" : "warningOff"}>
-          Please enter a valid username/password!
-        </p>
-      </form>
+      <div className="login_container">
+        <h2>SupaList</h2>
+        <h2>Login to your favourite shopping app</h2>
+        <form className="login_form">
+          <input
+            type="text"
+            placeholder="username"
+            value={username}
+            onChange={(e) => setusername(e.target.value)}
+          ></input>
+          <input
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setpassword(e.target.value)}
+          ></input>
+          <button type="button" className="loginbutton" onClick={checkAndLogin}>
+            Log In
+          </button>
+          <Link to="/createacc">
+            <li>Don't have an account?</li>
+          </Link>
+          <p className={warning ? "warningOn" : "warningOff"}>
+            Please enter a valid username/password!
+          </p>
+        </form>
+      </div>
     </div>
   );
 }
