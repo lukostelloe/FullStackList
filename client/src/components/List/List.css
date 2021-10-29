@@ -14,6 +14,7 @@
   flex-direction: row;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.8);
+  overflow: scroll;
 }
 
 .form {
@@ -36,6 +37,11 @@
   align-items: center;
 
   margin: 5px;
+}
+
+.buttons_div {
+  display: flex;
+  flex-direction: row;
 }
 
 .item_description {
@@ -130,14 +136,14 @@ button:active {
 
 .tickbuttonOn {
   margin: 10px;
-  padding: 0.5em 1em;
+  padding: 1em 2em;
 
   background: #aeffb2;
 
   border: none;
   border-radius: 0.5rem;
   color: #444;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.2rem;
   text-align: center;
@@ -149,18 +155,9 @@ button:active {
     6px 6px 8px rgba(255, 255, 255, 0.075), 6px 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* .tickbuttonOn {
-  background: #aeffb2;
-} */
-
-/* .tickbuttonOff {
-  background: #ffaeae;
-  text-decoration-line: line-through;
-} */
-
 .tickbuttonOff {
   margin: 10px;
-  padding: 0.5em 1em;
+  padding: 1em 2em;
 
   background: #ffaeae;
   text-decoration-line: line-through;
@@ -168,7 +165,7 @@ button:active {
   border: none;
   border-radius: 0.5rem;
   color: #444;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.2rem;
   text-align: center;
@@ -236,4 +233,12 @@ button:active {
     justify-content: center;
     align-items: center;
   }
+}
+
+.save {
+  display: block;
+}
+
+.nosave {
+  display: none;
 }

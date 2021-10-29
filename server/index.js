@@ -20,9 +20,9 @@ mongoose.connect(
 
 app.post("/insert", async (req, res) => {
   const numbers = req.body.number;
-  const dones = req.body.done;
+  const items = req.body.item;
 
-  const summary = new summaryModel({ number: numbers, done: dones });
+  const summary = new summaryModel({ number: numbers, item: items });
 
   try {
     await summary.save();
@@ -68,14 +68,14 @@ app.get("/readlogin", async (req, res) => {
 
 //UPDATE
 
-app.put("/updatedone", async (req, res) => {
-  const newdone = req.body.newdone;
+app.put("/updateitem", async (req, res) => {
+  const newitem = req.body.newitem;
   const id = req.body.id;
 
   try {
-    await summaryModel.findById(id, (err, updatedDone) => {
-      updatedDone.done = newdone;
-      updatedDone.save();
+    await summaryModel.findById(id, (err, updatedItem) => {
+      updatedItem.item = newitem;
+      updatedItem.save();
       res.send("update");
     });
   } catch (err) {

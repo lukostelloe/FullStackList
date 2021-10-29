@@ -8,11 +8,11 @@ import binimage from "../images/bin.png";
 
 function List() {
   const [number, setnumber] = useState(0);
-  const [done, setdone] = useState("");
-  const [newdone, setnewdone] = useState("");
+  const [item, setitem] = useState("");
+  const [newitem, setnewitem] = useState("");
   const [newnumber, setnewnumber] = useState(0);
   const [infolist, setinfolist] = useState([]);
-  const [logindetails, setlogindetails] = useState([]);
+  // const [logindetails, setlogindetails] = useState([]);
   const [openmodal, setopenmodal] = useState(false);
 
   useEffect(() => {
@@ -21,52 +21,50 @@ function List() {
     });
   }, []);
 
-  useEffect(() => {
-    Axios.get("http://localhost:3001/readlogin").then((response) => {
-      setlogindetails(response.data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   Axios.get("http://localhost:3001/readlogin").then((response) => {
+  //     setlogindetails(response.data);
+  //   });
+  // }, []);
 
   const addToList = async () => {
     try {
       const response = await Axios.post("http://localhost:3001/insert", {
         number: number,
-        done: done,
+        item: item,
       });
       setinfolist([...infolist, response.data]);
     } catch (error) {
       console.log("there is an error with addToList function");
     }
-
     // update component state
   };
 
-  const updateDone = async (id) => {
+  const updateItem = async (id) => {
     try {
-      const response = await Axios.put("http://localhost:3001/updatedone", {
+      const response = await Axios.put("http://localhost:3001/updateitem", {
         id: id,
-        newdone: newdone,
+        newitem: newitem,
       });
       console.log(response.data);
-      setnewdone([response.data]);
+      setnewitem([response.data]);
     } catch (error) {
-      console.log("there is an error with updateDone function");
+      console.log("there is an error with updateitem function");
     }
-
     // update component state
   };
 
   const updateNumber = (id) => {
-    window.location.reload();
     Axios.put("http://localhost:3001/updatenumber", {
       id: id,
       newnumber: newnumber,
     });
+    window.location.reload();
   };
 
   const deleteId = (id) => {
-    window.location.reload();
     Axios.delete(`http://localhost:3001/delete/${id}`);
+    window.location.reload();
     // filter deleted item
   };
 
@@ -78,6 +76,10 @@ function List() {
     }
   };
 
+  const saveList = () => {
+    console.log("hello");
+  };
+
   return (
     <div className="full_app">
       <div className="entry_and_form">
@@ -87,7 +89,7 @@ function List() {
             type="text"
             placeholder="item"
             onChange={(e) => {
-              setdone(e.target.value);
+              setitem(e.target.value);
             }}
           />
           <input
@@ -102,34 +104,37 @@ function List() {
             Add
           </button>
         </form>
-
-        <div>
+        <div className="list">
           {infolist.map((val) => {
             return (
               <div key={val._id} className="info_list">
-                <button className="tickbuttonOn" onClick={toggleTickOnOff}>
-                  {val.done}...{val.number}
-                </button>
-                <div>
-                  <button
-                    className="edit_button"
-                    onClick={() => setopenmodal(val._id)}
-                  >
-                    <img className="editimage" src={editimage} alt="edit" />
+                <div className="buttons_div">
+                  <button className="tickbuttonOn" onClick={toggleTickOnOff}>
+                    {val.item}
+                    {"    "}
+                    {val.number}
                   </button>
+                  <div>
+                    <button
+                      className="edit_button"
+                      onClick={() => setopenmodal(val._id)}
+                    >
+                      <img className="editimage" src={editimage} alt="edit" />
+                    </button>
 
-                  <button
-                    className="bin_button"
-                    onClick={() => deleteId(val._id)}
-                  >
-                    <img className="editimage" src={binimage} alt="edit" />
-                  </button>
+                    <button
+                      className="bin_button"
+                      onClick={() => deleteId(val._id)}
+                    >
+                      <img className="editimage" src={binimage} alt="edit" />
+                    </button>
+                  </div>
                 </div>
                 {openmodal === val._id && (
                   <Modal>
                     <div>
                       <div className="item_description">
-                        <h2>{val.done}</h2>
+                        <h2>{val.item}</h2>
                         <h2>({val.number})</h2>
                         <button
                           className="close_button"
@@ -143,12 +148,12 @@ function List() {
                         type="text"
                         placeholder="edit item"
                         onChange={(e) => {
-                          setnewdone(e.target.value);
+                          setnewitem(e.target.value);
                         }}
                       />
                       <button
                         className="update_button"
-                        onClick={() => updateDone(val._id)}
+                        onClick={() => updateItem(val._id)}
                       >
                         Update
                       </button>
@@ -173,6 +178,12 @@ function List() {
           })}
         </div>
       </div>
+      <button
+        className={infolist.length > 0 ? "save" : "nosave"}
+        onClick={saveList}
+      >
+        Save list
+      </button>
     </div>
   );
 }
