@@ -12,6 +12,7 @@ function List() {
   const [newitem, setnewitem] = useState("");
   const [newnumber, setnewnumber] = useState(0);
   const [infolist, setinfolist] = useState([]);
+  const [savedlists, setsavedlists] = useState([]);
   // const [logindetails, setlogindetails] = useState([]);
   const [openmodal, setopenmodal] = useState(false);
 
@@ -79,6 +80,17 @@ function List() {
   const saveList = () => {
     console.log("hello");
   };
+
+  // const saveList = async () => {
+  //   try {
+  //     const response = await Axios.post("http://localhost:3001/insertlist", {
+  //       list: list,
+  //     });
+  //     setinfolist([...savedlists, response.data]);
+  //   } catch (error) {
+  //     console.log("there is an error with the saveList function");
+  //   }
+  // };
 
   return (
     <div className="full_app">

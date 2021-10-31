@@ -5,6 +5,7 @@ const app = express();
 
 const summaryModel = require("./models/Shoppinglist");
 const loginModel = require("./models/Loginform");
+const listModel = require(".models/Savelist");
 
 app.use(express.json());
 app.use(cors());
@@ -46,18 +47,17 @@ app.post("/insertlogin", async (req, res) => {
   }
 });
 
-// app.post("/insertlist", async (req, res) => {
-//   const lists = req.body.list;
+app.post("/insertlist", async (req, res) => {
+  const lists = req.body.list;
+  const summarylist = new loginModel({ list: lists });
 
-//   const summarylist = new loginModel({ list: lists });
-
-//   try {
-//     await summarylist.save();
-//     res.send(summarylist);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
+  try {
+    await summarylist.save();
+    res.send(summarylist);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 //READ
 
