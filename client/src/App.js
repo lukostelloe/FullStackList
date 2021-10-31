@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import List from "./components/List/List";
 import Login from "./components/Login/Login";
 import Createacc from "./components/Createacc/Createacc";
-import Savedlists from "./components/Savedlists/Savedlists";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
           <Route path="/createacc" component={Createacc} />
           <Route path="/login" component={Login} />
           <Route path="/list" component={List} />
-          <Route path="/savedlists" component={Savedlists} />
+          <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </div>
     </Router>

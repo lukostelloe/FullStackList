@@ -13,8 +13,8 @@ function Navbar() {
           <Link to="/list" className="link">
             <li>List</li>
           </Link>
-          <Link to="/savedlists" className="link">
-            <li>Savedlists</li>
+          <Link to="/dashboard" className="link">
+            <li>Dashboard</li>
           </Link>
         </ul>
       </div>

@@ -46,6 +46,19 @@ app.post("/insertlogin", async (req, res) => {
   }
 });
 
+// app.post("/insertlist", async (req, res) => {
+//   const lists = req.body.list;
+
+//   const summarylist = new loginModel({ list: lists });
+
+//   try {
+//     await summarylist.save();
+//     res.send(summarylist);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
+
 //READ
 
 app.get("/read", async (req, res) => {
