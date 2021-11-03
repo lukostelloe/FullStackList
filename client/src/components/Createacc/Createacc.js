@@ -10,7 +10,7 @@ function Createacc() {
   const [userlist, setuserlist] = useState([]);
   const [warning, setwarning] = useState(false);
 
-  const validPass = new RegExp(/^(?=.*?[a-z][A-Z][0-9]).+$/);
+  const validPass = new RegExp(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9]).+$/);
 
   const addToList = async () => {
     if (!validPass.test(password)) {

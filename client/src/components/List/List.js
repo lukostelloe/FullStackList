@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 import "./List.css";
+
 import Modal from "../Modal/Modal";
 import Axios from "axios";
 
@@ -12,9 +13,16 @@ function List() {
   const [newitem, setnewitem] = useState("");
   const [newnumber, setnewnumber] = useState(0);
   const [infolist, setinfolist] = useState([]);
-  const [savedlists, setsavedlists] = useState([]);
-  // const [logindetails, setlogindetails] = useState([]);
+  // const [list, setlist] = useState([]);
   const [openmodal, setopenmodal] = useState(false);
+  const [logindetails, setlogindetails] = useState("");
+
+  ///////////////////////// TO DO ///////////////////////////////
+
+  //1. Another page for the site
+  //2. All criteria already met, just need to flesh it out
+  //3. On list page, a welcome (user) atm I cannot display user that just logged in
+  //4. Passing data between components
 
   useEffect(() => {
     Axios.get("http://localhost:3001/read").then((response) => {
@@ -23,16 +31,17 @@ function List() {
   }, []);
 
   // useEffect(() => {
-  //   Axios.get("http://localhost:3001/readlogin").then((response) => {
-  //     setlogindetails(response.data);
+  //   Axios.get("http://localhost:3001/readlogin").then((login) => {
+  //     setlogindetails(login);
   //   });
-  // }, []);
+  //   console.log(logindetails);
+  // });
 
   const addToList = async () => {
     try {
       const response = await Axios.post("http://localhost:3001/insert", {
-        number: number,
         item: item,
+        number: number,
       });
       setinfolist([...infolist, response.data]);
     } catch (error) {
@@ -40,6 +49,18 @@ function List() {
     }
     // update component state
   };
+
+  // const saveList = async () => {
+  //   try {
+  //     const response = await Axios.post("http://localhost:3001/insertlist", {
+  //       list: list,
+  //     });
+  //     setlist([...list, response.data]);
+  //     console.log(list);
+  //   } catch (error) {
+  //     console.log("there is an error with the saveList function");
+  //   }
+  // };
 
   const updateItem = async (id) => {
     try {
@@ -79,21 +100,12 @@ function List() {
 
   const saveList = () => {
     console.log("hello");
+    console.log(infolist);
   };
-
-  // const saveList = async () => {
-  //   try {
-  //     const response = await Axios.post("http://localhost:3001/insertlist", {
-  //       list: list,
-  //     });
-  //     setinfolist([...savedlists, response.data]);
-  //   } catch (error) {
-  //     console.log("there is an error with the saveList function");
-  //   }
-  // };
 
   return (
     <div className="full_app">
+      <h2>Welcome {logindetails[0]}</h2>
       <div className="entry_and_form">
         <form className="form">
           <input

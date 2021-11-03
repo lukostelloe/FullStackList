@@ -15,6 +15,8 @@ function Dashboard() {
   return (
     <div className="dashboard">
       <div className="dashboard_container">
+        {/* HERE I SHOULD HAVE USERNAME AND DETAILS */}
+
         <h2>Welcome, Luke</h2>
         <h2>Your lists</h2>
         {infolist.map((m) => {
