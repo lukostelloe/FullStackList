@@ -34,6 +34,7 @@ function Createacc() {
           console.log("there is an error with addToList function");
         }
       } else {
+        setwarning(true);
         console.log("pass and conf don't match");
       }
     }
