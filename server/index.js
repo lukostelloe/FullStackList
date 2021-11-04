@@ -4,8 +4,7 @@ const cors = require("cors");
 const app = express();
 
 const summaryModel = require("./models/Shoppinglist");
-const loginModel = require("./models/Loginform");
-// const listModel = require(".models/Savelist");
+const userModel = require("./models/User");
 
 app.use(express.json());
 app.use(cors());
@@ -16,6 +15,35 @@ mongoose.connect(
     useNewUrlParser: true,
   }
 );
+
+// get lists
+
+app.get("/lists", async (req, res) => {
+  const { user_id } = req.body;
+
+  if (!user_id) {
+    return res.send("Error!");
+  }
+
+  try {
+    const results = await List.find({ user_id });
+
+    return res.send(results);
+  } catch (error) {
+    return res.send(error);
+  }
+});
+
+app.get("/items", async (req, res) => {
+  const { list_id } = req.body;
+
+  try {
+    const results = await Item.find({ list_id });
+    return res.send(results);
+  } catch (error) {
+    res.send(error);
+  }
+});
 
 //CREATE
 
@@ -36,8 +64,13 @@ app.post("/insert", async (req, res) => {
 app.post("/insertlogin", async (req, res) => {
   const users = req.body.username;
   const passwords = req.body.password;
+  const firstnames = req.body.firstname;
 
-  const summarylogin = new loginModel({ username: users, password: passwords });
+  const summarylogin = new userModel({
+    username: users,
+    password: passwords,
+    firstname: firstnames,
+  });
 
   try {
     await summarylogin.save();
@@ -46,18 +79,6 @@ app.post("/insertlogin", async (req, res) => {
     console.log(err);
   }
 });
-
-// app.post("/insertlist", async (req, res) => {
-//   const lists = req.body.list;
-//   const summarylist = new listModel({ list: lists });
-
-//   try {
-//     await summarylist.save();
-//     res.send(summarylist);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
 
 //READ
 
@@ -70,13 +91,27 @@ app.get("/read", async (req, res) => {
   });
 });
 
+//check the username and password for login
+
 app.get("/readlogin", async (req, res) => {
-  loginModel.find({}, (err, result) => {
-    if (err) {
-      res.send(err);
+  const { username, password } = req.query;
+
+  if (username.length < 1) {
+    return res.send({ message: "please add username" });
+  }
+
+  userModel.findOne(
+    {
+      username,
+      password,
+    },
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      }
+      res.send(result);
     }
-    res.send(result);
-  });
+  );
 });
 
 //UPDATE

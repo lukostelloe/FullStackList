@@ -10,51 +10,53 @@ function Login() {
   const [warning, setwarning] = useState(false);
   let history = useHistory();
 
-  useEffect(() => {
-    Axios.get("http://localhost:3001/readlogin").then((response) => {
+  console.log({ userdetails });
+
+  function submitLoginForm(e) {
+    e.preventDefault();
+    const username = e.target.elements.username.value;
+    const password = e.target.elements.password.value;
+
+    Axios.get("http://localhost:3001/readlogin", {
+      params: { username, password },
+    }).then((response) => {
       setuserdetails(response.data);
+      console.log(userdetails);
     });
-  }, []);
 
-  const checkAndLogin = (e) => {
-    console.log(username);
-    console.log(password);
-    console.log(userdetails);
-
-    for (let i = 0; i < userdetails.length; i++) {
-      if (
-        userdetails[i].username === username &&
-        userdetails[i].password === password
-      ) {
-        console.log("username and password match");
-        history.push("/list");
-      } else {
-        console.log("no match at all");
-        // e.target.className = "loginerror";
-        setwarning(true);
-      }
+    if (
+      userdetails.username === username &&
+      userdetails.password === password
+    ) {
+      console.log("username and password match");
+      history.push("/list");
+    } else {
+      console.log("no match at all");
+      setwarning(true);
     }
-  };
+  }
 
   return (
     <div className="login_div">
       <div className="login_container">
         <h2>SupaList</h2>
         <h2>Log in to your favourite shopping app</h2>
-        <form className="login_form">
+        <form className="login_form" onSubmit={submitLoginForm}>
           <input
             type="text"
             placeholder="username"
+            name="username"
             value={username}
             onChange={(e) => setusername(e.target.value)}
           ></input>
           <input
             type="password"
             placeholder="password"
+            name="password"
             value={password}
             onChange={(e) => setpassword(e.target.value)}
           ></input>
-          <button type="button" className="loginbutton" onClick={checkAndLogin}>
+          <button type="submit" className="loginbutton">
             Log In
           </button>
           <Link to="/createacc">

@@ -19,10 +19,17 @@ function List() {
 
   ///////////////////////// TO DO ///////////////////////////////
 
-  //1. Another page for the site
-  //2. All criteria already met, just need to flesh it out
-  //3. On list page, a welcome (user) atm I cannot display user that just logged in
-  //4. Passing data between components
+  //1. Another page for the site (Dashboard with user details maybe?)
+
+  //2. On list page, a welcome (user) atm I cannot display user that just logged in
+
+  //3. Passing data between components (taking the user login details, user list) (axios.read??)
+
+  //4. Personal list for each user (ability to save and create multiple lists with names, store the array in a new array (List 1, list 2, list 3))
+
+  //5. hash passwords in the database ("bcrypt")
+
+  //6. safe login and logout (using Axios again???)
 
   useEffect(() => {
     Axios.get("http://localhost:3001/read").then((response) => {
