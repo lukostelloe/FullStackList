@@ -5,7 +5,7 @@ const app = express();
 
 const userModel = require("./models/User");
 const itemModel = require("./models/Item");
-// const listModel = require("./models/List");
+const listModel = require("./models/List");
 
 app.use(express.json());
 app.use(cors());
@@ -76,6 +76,23 @@ app.post("/insertlogin", async (req, res) => {
   try {
     await summarylogin.save();
     res.send(summarylogin);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.post("/insertlist", async (req, res) => {
+  const listnames = req.body.listname;
+  const items = req.body.listitems;
+
+  const summarylist = new listModel({
+    listname: listnames,
+    item: items,
+  });
+
+  try {
+    await summarylist.save();
+    res.send(summarylist);
   } catch (err) {
     console.log(err);
   }

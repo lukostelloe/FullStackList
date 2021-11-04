@@ -10,12 +10,18 @@ import binimage from "../images/bin.png";
 function List() {
   const [number, setnumber] = useState(0);
   const [item, setitem] = useState("");
+
+  const [logindetails, setlogindetails] = useState("");
+
   const [newitem, setnewitem] = useState("");
   const [newnumber, setnewnumber] = useState(0);
+
   const [infolist, setinfolist] = useState([]);
-  // const [list, setlist] = useState([]);
+
+  const [listname, setListName] = useState([]);
+  const [listitems, setListItems] = useState([]);
+
   const [openmodal, setopenmodal] = useState(false);
-  const [logindetails, setlogindetails] = useState("");
 
   ///////////////////////// TO DO ///////////////////////////////
 
@@ -36,6 +42,8 @@ function List() {
       setinfolist(response.data);
     });
   }, []);
+
+  console.log(infolist);
 
   const addToList = async () => {
     try {
@@ -71,10 +79,6 @@ function List() {
     window.location.reload();
   };
 
-  // const deleteId = (id) => {
-  //   Axios.delete(`http://localhost:3001/delete/${id}`);
-  // };
-
   const deleteId = async (id) => {
     try {
       await Axios.delete(`http://localhost:3001/delete/${id}`);
@@ -92,9 +96,17 @@ function List() {
     }
   };
 
-  const saveList = () => {
-    console.log("hello");
-    console.log(infolist);
+  const saveList = async () => {
+    try {
+      const response = await Axios.post("http://localhost:3001/insertlist", {
+        listname: listname,
+        items: listitems,
+      });
+      setListName("1");
+      setListItems("stuff");
+    } catch (error) {
+      console.log("there is an error with saveList function");
+    }
   };
 
   const logOut = () => {
