@@ -3,8 +3,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
 
-const summaryModel = require("./models/Shoppinglist");
 const userModel = require("./models/User");
+const itemModel = require("./models/Item");
+// const listModel = require("./models/List");
 
 app.use(express.json());
 app.use(cors());
@@ -51,11 +52,11 @@ app.post("/insert", async (req, res) => {
   const numbers = req.body.number;
   const items = req.body.item;
 
-  const summary = new summaryModel({ number: numbers, item: items });
+  const itemsummary = new itemModel({ number: numbers, item: items });
 
   try {
-    await summary.save();
-    res.send(summary);
+    await itemsummary.save();
+    res.send(itemsummary);
   } catch (err) {
     console.log(err);
   }
@@ -83,7 +84,7 @@ app.post("/insertlogin", async (req, res) => {
 //READ
 
 app.get("/read", async (req, res) => {
-  summaryModel.find({}, (err, result) => {
+  itemModel.find({}, (err, result) => {
     if (err) {
       res.send(err);
     }
@@ -121,7 +122,7 @@ app.put("/updateitem", async (req, res) => {
   const id = req.body.id;
 
   try {
-    await summaryModel.findById(id, (err, updatedItem) => {
+    await itemModel.findById(id, (err, updatedItem) => {
       updatedItem.item = newitem;
       updatedItem.save();
       res.send("update");
@@ -136,7 +137,7 @@ app.put("/updatenumber", async (req, res) => {
   const id = req.body.id;
 
   try {
-    await summaryModel.findById(id, (err, updatedNumber) => {
+    await itemModel.findById(id, (err, updatedNumber) => {
       updatedNumber.number = newnumber;
       updatedNumber.save();
       res.send("update");
@@ -151,7 +152,7 @@ app.put("/updatenumber", async (req, res) => {
 app.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
 
-  await summaryModel.findByIdAndDelete(id).exec();
+  await itemModel.findByIdAndDelete(id).exec();
   res.send("deleted");
 });
 

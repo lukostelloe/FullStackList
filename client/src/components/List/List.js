@@ -37,13 +37,6 @@ function List() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   Axios.get("http://localhost:3001/readlogin").then((login) => {
-  //     setlogindetails(login);
-  //   });
-  //   console.log(logindetails);
-  // });
-
   const addToList = async () => {
     try {
       const response = await Axios.post("http://localhost:3001/insert", {
@@ -54,20 +47,7 @@ function List() {
     } catch (error) {
       console.log("there is an error with addToList function");
     }
-    // update component state
   };
-
-  // const saveList = async () => {
-  //   try {
-  //     const response = await Axios.post("http://localhost:3001/insertlist", {
-  //       list: list,
-  //     });
-  //     setlist([...list, response.data]);
-  //     console.log(list);
-  //   } catch (error) {
-  //     console.log("there is an error with the saveList function");
-  //   }
-  // };
 
   const updateItem = async (id) => {
     try {
@@ -80,7 +60,7 @@ function List() {
     } catch (error) {
       console.log("there is an error with updateitem function");
     }
-    // update component state
+    window.location.reload();
   };
 
   const updateNumber = (id) => {
@@ -91,10 +71,17 @@ function List() {
     window.location.reload();
   };
 
-  const deleteId = (id) => {
-    Axios.delete(`http://localhost:3001/delete/${id}`);
+  // const deleteId = (id) => {
+  //   Axios.delete(`http://localhost:3001/delete/${id}`);
+  // };
+
+  const deleteId = async (id) => {
+    try {
+      await Axios.delete(`http://localhost:3001/delete/${id}`);
+    } catch (error) {
+      console.log("there is an error with delete function");
+    }
     window.location.reload();
-    // filter deleted item
   };
 
   const toggleTickOnOff = (e) => {
@@ -110,9 +97,13 @@ function List() {
     console.log(infolist);
   };
 
+  const logOut = () => {
+    console.log("logout");
+  };
+
   return (
     <div className="full_app">
-      <h2>Welcome {logindetails[0]}</h2>
+      <h2>Welcome {logindetails}</h2>
       <div className="entry_and_form">
         <form className="form">
           <input
@@ -215,6 +206,7 @@ function List() {
       >
         Save list
       </button>
+      <button onClick={logOut}>Log Out</button>
     </div>
   );
 }

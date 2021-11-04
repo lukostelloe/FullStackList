@@ -3,12 +3,12 @@
 const mongoose = require("mongoose");
 
 const Items = new mongoose.Schema({
-  name: {
+  item: {
     type: String,
     required: true,
   },
-  list_id: {
-    type: String,
+  number: {
+    type: Number,
     required: true,
   },
 });

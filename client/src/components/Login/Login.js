@@ -6,7 +6,7 @@ import Axios from "axios";
 function Login() {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
-  const [userdetails, setuserdetails] = useState("");
+  const [userdetails, setUserDetails] = useState("");
   const [warning, setwarning] = useState(false);
   let history = useHistory();
 
@@ -20,7 +20,7 @@ function Login() {
     Axios.get("http://localhost:3001/readlogin", {
       params: { username, password },
     }).then((response) => {
-      setuserdetails(response.data);
+      setUserDetails(response.data);
       console.log(userdetails);
     });
 
@@ -33,6 +33,7 @@ function Login() {
     } else {
       console.log("no match at all");
       setwarning(true);
+      setUserDetails("");
     }
   }
 
