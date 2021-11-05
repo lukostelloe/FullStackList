@@ -6,7 +6,6 @@ import Axios from "axios";
 function Createacc() {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
-  const [firstname, setFirstName] = useState("");
   const [confpass, setconfpass] = useState("");
   const [userlist, setuserlist] = useState([]);
   const [warning, setwarning] = useState(false);
@@ -23,11 +22,10 @@ function Createacc() {
       if (password === confpass) {
         try {
           const response = await Axios.post(
-            "http://localhost:3001/insertlogin",
+            "http://localhost:3001/insertuser",
             {
               username: username,
               password: password,
-              firstname: firstname,
             }
           );
           setuserlist([...userlist, response.data]);
@@ -47,12 +45,6 @@ function Createacc() {
       <div className="login_container">
         <h2>Create Account</h2>
         <form className="login_form">
-          <input
-            type="text"
-            placeholder="firstname"
-            value={firstname}
-            onChange={(e) => setFirstName(e.target.value)}
-          ></input>
           <input
             type="text"
             placeholder="username"

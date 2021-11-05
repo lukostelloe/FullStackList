@@ -47,7 +47,7 @@ app.get("/items", async (req, res) => {
 });
 
 //CREATE
-
+//create item
 app.post("/insert", async (req, res) => {
   const numbers = req.body.number;
   const items = req.body.item;
@@ -62,37 +62,34 @@ app.post("/insert", async (req, res) => {
   }
 });
 
-app.post("/insertlogin", async (req, res) => {
-  const users = req.body.username;
-  const passwords = req.body.password;
-  const firstnames = req.body.firstname;
-
-  const summarylogin = new userModel({
-    username: users,
-    password: passwords,
-    firstname: firstnames,
+//create list
+app.post("/insertlist", async (req, res) => {
+  const listitems = req.body.currentlist;
+  const listsummary = new listModel({
+    items: listitems,
   });
 
   try {
-    await summarylogin.save();
-    res.send(summarylogin);
+    await listsummary.save();
+    res.send(listsummary);
   } catch (err) {
     console.log(err);
   }
 });
 
-app.post("/insertlist", async (req, res) => {
-  const listnames = req.body.listname;
-  const items = req.body.listitems;
+//createlogin
+app.post("/insertuser", async (req, res) => {
+  const users = req.body.username;
+  const passwords = req.body.password;
 
-  const summarylist = new listModel({
-    listname: listnames,
-    item: items,
+  const summarylogin = new userModel({
+    username: users,
+    password: passwords,
   });
 
   try {
-    await summarylist.save();
-    res.send(summarylist);
+    await summarylogin.save();
+    res.send(summarylogin);
   } catch (err) {
     console.log(err);
   }
@@ -111,7 +108,7 @@ app.get("/read", async (req, res) => {
 
 //check the username and password for login
 
-app.get("/readlogin", async (req, res) => {
+app.get("/readuser", async (req, res) => {
   const { username, password } = req.query;
 
   if (username.length < 1) {

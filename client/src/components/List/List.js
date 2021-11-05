@@ -8,42 +8,24 @@ import editimage from "../images/edit.png";
 import binimage from "../images/bin.png";
 
 function List() {
+  const [openmodal, setopenmodal] = useState(false);
+
   const [number, setnumber] = useState(0);
   const [item, setitem] = useState("");
 
-  const [logindetails, setlogindetails] = useState("");
+  const [currentlist, setCurrentList] = useState([]);
 
   const [newitem, setnewitem] = useState("");
   const [newnumber, setnewnumber] = useState(0);
 
-  const [infolist, setinfolist] = useState([]);
-
-  const [listname, setListName] = useState([]);
   const [listitems, setListItems] = useState([]);
-
-  const [openmodal, setopenmodal] = useState(false);
-
-  ///////////////////////// TO DO ///////////////////////////////
-
-  //1. Another page for the site (Dashboard with user details maybe?)
-
-  //2. On list page, a welcome (user) atm I cannot display user that just logged in
-
-  //3. Passing data between components (taking the user login details, user list) (axios.read??)
-
-  //4. Personal list for each user (ability to save and create multiple lists with names, store the array in a new array (List 1, list 2, list 3))
-
-  //5. hash passwords in the database ("bcrypt")
-
-  //6. safe login and logout (using Axios again???)
 
   useEffect(() => {
     Axios.get("http://localhost:3001/read").then((response) => {
-      setinfolist(response.data);
+      setCurrentList(response.data);
+      console.log(response.data);
     });
   }, []);
-
-  console.log(infolist);
 
   const addToList = async () => {
     try {
@@ -51,9 +33,21 @@ function List() {
         item: item,
         number: number,
       });
-      setinfolist([...infolist, response.data]);
+      setCurrentList([...currentlist, response.data]);
     } catch (error) {
       console.log("there is an error with addToList function");
+    }
+  };
+
+  const saveList = async () => {
+    try {
+      const response = await Axios.post("http://localhost:3001/insertlist", {
+        items: currentlist,
+      });
+      setListItems(...currentlist, response.data);
+      console.log(listitems);
+    } catch (error) {
+      console.log("there is an error with saveList function");
     }
   };
 
@@ -96,26 +90,13 @@ function List() {
     }
   };
 
-  const saveList = async () => {
-    try {
-      const response = await Axios.post("http://localhost:3001/insertlist", {
-        listname: listname,
-        items: listitems,
-      });
-      setListName("1");
-      setListItems("stuff");
-    } catch (error) {
-      console.log("there is an error with saveList function");
-    }
-  };
-
   const logOut = () => {
     console.log("logout");
   };
 
   return (
     <div className="full_app">
-      <h2>Welcome {logindetails}</h2>
+      <h2>Welcome (logindetails)</h2>
       <div className="entry_and_form">
         <form className="form">
           <input
@@ -139,7 +120,7 @@ function List() {
           </button>
         </form>
         <div className="list">
-          {infolist.map((val) => {
+          {currentlist.map((val) => {
             return (
               <div key={val._id} className="info_list">
                 <div className="buttons_div">
@@ -213,7 +194,7 @@ function List() {
         </div>
       </div>
       <button
-        className={infolist.length > 0 ? "save" : "nosave"}
+        className={currentlist.length > 0 ? "save" : "nosave"}
         onClick={saveList}
       >
         Save list

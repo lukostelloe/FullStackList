@@ -6,36 +6,35 @@ import Axios from "axios";
 function Login() {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
-  const [userdetails, setUserDetails] = useState("");
+  // const [userdetails, setUserDetails] = useState("");
   const [warning, setwarning] = useState(false);
   let history = useHistory();
 
-  console.log({ userdetails });
+  // console.log({ userdetails });
 
-  function submitLoginForm(e) {
+  const submitLoginForm = async (e) => {
     e.preventDefault();
     const username = e.target.elements.username.value;
     const password = e.target.elements.password.value;
 
-    Axios.get("http://localhost:3001/readlogin", {
+    const response = await Axios.get("http://localhost:3001/readuser", {
       params: { username, password },
-    }).then((response) => {
-      setUserDetails(response.data);
-      console.log(userdetails);
     });
 
+    // console.log(response.data);
+    // setUserDetails(response.data);
+    // console.log(userdetails);
+
     if (
-      userdetails.username === username &&
-      userdetails.password === password
+      response.data.username === username &&
+      response.data.password === password
     ) {
-      console.log("username and password match");
       history.push("/list");
     } else {
       console.log("no match at all");
       setwarning(true);
-      setUserDetails("");
     }
-  }
+  };
 
   return (
     <div className="login_div">
