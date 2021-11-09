@@ -14,10 +14,8 @@ function List() {
   const [item, setitem] = useState("");
 
   const [currentlist, setCurrentList] = useState([]);
-
   const [newitem, setnewitem] = useState("");
   const [newnumber, setnewnumber] = useState(0);
-
   const [listitems, setListItems] = useState([]);
 
   useEffect(() => {

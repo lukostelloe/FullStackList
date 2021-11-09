@@ -12,3 +12,7 @@ const User = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("User", User);
+
+//THIS IS FOR THE LIST SCHEMA
+// Create a Items collection that will contain the following schema
+// Items user_id, Items_id (_id), Items name, items_ids.
