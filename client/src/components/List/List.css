@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
 
   background-image: url(../images/listpage.jpg);
   background-size: cover;
@@ -240,6 +240,15 @@ button:active {
 }
 
 .nosave {
+  display: none;
+}
+
+.saveinput {
+  display: block;
+  width: 20%;
+}
+
+.nosaveinput {
   display: none;
 }
 

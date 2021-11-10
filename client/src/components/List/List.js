@@ -126,7 +126,7 @@ function List() {
 
   return (
     <div className="full_app">
-      <h2>Welcome (logindetails)</h2>
+      <h2>Items</h2>
       <div className="entry_and_form">
         <form className="form">
           <input
@@ -222,6 +222,7 @@ function List() {
           })}
         </div>
       </div>
+      <h2>Lists</h2>
       <div className="list_buttons">
         {lists.map((m) => {
           return (
@@ -242,7 +243,7 @@ function List() {
       <input
         type="text"
         placeholder="List Name"
-        className="input_for_list"
+        className={currentList.length > 0 ? "saveinput" : "nosaveinput"}
         onChange={(e) => {
           setListName(e.target.value);
         }}
