@@ -19,6 +19,8 @@ function List() {
   const [newnumber, setnewnumber] = useState(0);
 
   const [listname, setListName] = useState("");
+
+  const [lists, setLists] = useState([]);
   // const [listitems, setListItems] = useState([""]);
 
   //READ ITEMS DB ON PAGE RENDER
@@ -26,6 +28,13 @@ function List() {
     Axios.get("http://localhost:3001/read").then((response) => {
       setCurrentList(response.data);
       console.log(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/readlist").then((response) => {
+      console.log(response.data);
+      setLists(response.data);
     });
   }, []);
 
@@ -91,6 +100,16 @@ function List() {
     window.location.reload();
   };
 
+  //DELETE LIST
+  const deleteList = async (id) => {
+    try {
+      await Axios.delete(`http://localhost:3001/deletelist/${id}`);
+    } catch (error) {
+      console.log("there is an error with delete function");
+    }
+    window.location.reload();
+  };
+
   //CROSS OUT ITEMS IN THE LIST
   const toggleTickOnOff = (e) => {
     if (e.target.className === "tickbuttonOn") {
@@ -147,7 +166,6 @@ function List() {
                     >
                       <img className="editimage" src={editimage} alt="edit" />
                     </button>
-
                     <button
                       className="bin_button"
                       onClick={() => deleteId(val._id)}
@@ -204,9 +222,26 @@ function List() {
           })}
         </div>
       </div>
+      <div className="list_buttons">
+        {lists.map((m) => {
+          return (
+            <div>
+              <button
+                className="list_item_buttons"
+                onClick={(e) => setCurrentList(m.items)}
+              >
+                {m.listname}
+              </button>
+              <button className="bin_button" onClick={() => deleteList(m._id)}>
+                <img className="editimage" src={binimage} alt="edit" />
+              </button>
+            </div>
+          );
+        })}
+      </div>
       <input
         type="text"
-        placeholder="list name"
+        placeholder="List Name"
         className="input_for_list"
         onChange={(e) => {
           setListName(e.target.value);

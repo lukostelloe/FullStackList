@@ -5,10 +5,18 @@ import { Link } from "react-router-dom";
 
 function Dashboard() {
   const [currentList, setCurrentList] = useState([]);
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    Axios.get("http://localhost:3001/read").then((response) => {
+      setItems(response.data);
+      console.log(response.data);
+    });
+  }, []);
 
   useEffect(() => {
     Axios.get("http://localhost:3001/readlist").then((response) => {
-      setCurrentList([...response.data]);
+      console.log(response.data);
+      setCurrentList(response.data);
     });
   }, []);
 
@@ -20,7 +28,7 @@ function Dashboard() {
         <h2>Welcome, Luke</h2>
         <h2>Your lists</h2>
         {currentList.map((m) => {
-          return <div key={m.listname}>{m.items}</div>;
+          return <div key={m}>{m.listname}</div>;
         })}
         <Link to="/login" className="logout">
           <li>Log Out</li>

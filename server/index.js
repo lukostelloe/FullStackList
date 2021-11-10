@@ -179,6 +179,14 @@ app.delete("/delete/:id", async (req, res) => {
   res.send("deleted");
 });
 
+//DELETE LIST
+app.delete("/deletelist/:id", async (req, res) => {
+  const id = req.params.id;
+
+  await listModel.findByIdAndDelete(id).exec();
+  res.send("deleted");
+});
+
 //ASSIGN THE SERVER TO AN ADDRESS
 app.listen(3001, () => {
   console.log("server running on port 3001");
