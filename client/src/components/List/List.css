@@ -242,3 +242,7 @@ button:active {
 .nosave {
   display: none;
 }
+
+.input_for_list {
+  width: 25%;
+}

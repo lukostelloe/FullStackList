@@ -3,8 +3,12 @@
 const mongoose = require("mongoose");
 
 const List = new mongoose.Schema({
-  items: {
+  listname: {
     type: String,
+    required: true,
+  },
+  items: {
+    type: Array,
     required: true,
   },
 });

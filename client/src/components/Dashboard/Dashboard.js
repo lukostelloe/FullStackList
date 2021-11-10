@@ -4,23 +4,23 @@ import "./Dashboard.css";
 import { Link } from "react-router-dom";
 
 function Dashboard() {
-  const [currentlist, setCurrentList] = useState([]);
+  const [currentList, setCurrentList] = useState([]);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/read").then((response) => {
+    Axios.get("http://localhost:3001/readlist").then((response) => {
       setCurrentList([...response.data]);
     });
   }, []);
 
-  console.log(currentlist);
+  console.log(currentList);
 
   return (
     <div className="dashboard">
       <div className="dashboard_container">
         <h2>Welcome, Luke</h2>
         <h2>Your lists</h2>
-        {currentlist.map((m) => {
-          return <div key={m._id}>{m.items}</div>;
+        {currentList.map((m) => {
+          return <div key={m.listname}>{m.items}</div>;
         })}
         <Link to="/login" className="logout">
           <li>Log Out</li>

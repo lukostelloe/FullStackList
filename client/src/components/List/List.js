@@ -13,11 +13,15 @@ function List() {
   const [number, setnumber] = useState(0);
   const [item, setitem] = useState("");
 
-  const [currentlist, setCurrentList] = useState([]);
+  const [currentList, setCurrentList] = useState([]);
+
   const [newitem, setnewitem] = useState("");
   const [newnumber, setnewnumber] = useState(0);
-  const [listitems, setListItems] = useState([]);
 
+  const [listname, setListName] = useState("");
+  // const [listitems, setListItems] = useState([""]);
+
+  //READ ITEMS DB ON PAGE RENDER
   useEffect(() => {
     Axios.get("http://localhost:3001/read").then((response) => {
       setCurrentList(response.data);
@@ -25,30 +29,35 @@ function List() {
     });
   }, []);
 
+  //ADD ITEM TO LIST
   const addToList = async () => {
     try {
       const response = await Axios.post("http://localhost:3001/insert", {
         item: item,
         number: number,
       });
-      setCurrentList([...currentlist, response.data]);
+      setCurrentList([...currentList, response.data]);
     } catch (error) {
       console.log("there is an error with addToList function");
     }
   };
 
+  //SAVE LIST
   const saveList = async () => {
+    console.log(listname);
+    console.log(currentList);
     try {
       const response = await Axios.post("http://localhost:3001/insertlist", {
-        items: currentlist,
+        listname: listname,
+        items: currentList,
       });
-      setListItems(...currentlist, response.data);
-      console.log(listitems);
+      console.log(response.data);
     } catch (error) {
       console.log("there is an error with saveList function");
     }
   };
 
+  //UPDATE ITEM
   const updateItem = async (id) => {
     try {
       const response = await Axios.put("http://localhost:3001/updateitem", {
@@ -63,6 +72,7 @@ function List() {
     window.location.reload();
   };
 
+  //UPDATE NUMBER
   const updateNumber = (id) => {
     Axios.put("http://localhost:3001/updatenumber", {
       id: id,
@@ -71,6 +81,7 @@ function List() {
     window.location.reload();
   };
 
+  //DELETE ITEM
   const deleteId = async (id) => {
     try {
       await Axios.delete(`http://localhost:3001/delete/${id}`);
@@ -80,6 +91,7 @@ function List() {
     window.location.reload();
   };
 
+  //CROSS OUT ITEMS IN THE LIST
   const toggleTickOnOff = (e) => {
     if (e.target.className === "tickbuttonOn") {
       e.target.className = "tickbuttonOff";
@@ -88,6 +100,7 @@ function List() {
     }
   };
 
+  //LOGOUT FUNCTION
   const logOut = () => {
     console.log("logout");
   };
@@ -118,7 +131,7 @@ function List() {
           </button>
         </form>
         <div className="list">
-          {currentlist.map((val) => {
+          {currentList.map((val) => {
             return (
               <div key={val._id} className="info_list">
                 <div className="buttons_div">
@@ -191,8 +204,16 @@ function List() {
           })}
         </div>
       </div>
+      <input
+        type="text"
+        placeholder="list name"
+        className="input_for_list"
+        onChange={(e) => {
+          setListName(e.target.value);
+        }}
+      />
       <button
-        className={currentlist.length > 0 ? "save" : "nosave"}
+        className={currentList.length > 0 ? "save" : "nosave"}
         onClick={saveList}
       >
         Save list
