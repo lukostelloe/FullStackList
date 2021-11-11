@@ -10,12 +10,15 @@ function Navbar() {
           <Link to="/login" className="link">
             <li>Login</li>
           </Link>
-          <Link to="/list" className="link">
+          <Link to="/login" className="link">
+            <li>Logout</li>
+          </Link>
+          {/* <Link to="/list" className="link">
             <li>List</li>
-          </Link>
-          <Link to="/dashboard" className="link">
+          </Link> */}
+          {/* <Link to="/dashboard" className="link">
             <li>Dashboard</li>
-          </Link>
+          </Link> */}
         </ul>
       </div>
     </div>
