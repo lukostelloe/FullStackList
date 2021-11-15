@@ -21,10 +21,6 @@ function Login() {
       params: { username, password },
     });
 
-    // console.log(response.data);
-    // setUserDetails(response.data);
-    // console.log(userdetails);
-
     if (
       response.data.username === username &&
       response.data.password === password
