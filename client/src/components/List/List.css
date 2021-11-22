@@ -291,6 +291,7 @@ button:active {
 
 .save {
   display: block;
+  background: #24cfaa;
 }
 
 .nosave {
@@ -373,4 +374,22 @@ button:active {
 .logout_button {
   background: #ff6c6c;
   color: white;
+}
+
+.save_list_button {
+  background: #24cfaa;
+}
+
+.heading_div {
+  margin: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 10px;
+  background-color: rgba(112, 246, 251, 0.8);
+}
+
+.savelist_div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

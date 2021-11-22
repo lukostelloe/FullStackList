@@ -123,7 +123,10 @@ function List() {
     <div className="full_app">
       <div className="window">
         <div className="items_div">
-          <h2>Items</h2>
+          <div className="heading_div">
+            <h2>Items</h2>
+          </div>
+
           <div className="entry_and_form">
             <form className="form">
               <input
@@ -234,7 +237,10 @@ function List() {
         </div>
 
         <div className="lists_div">
-          <h2>Lists</h2>
+          <div className="heading_div">
+            <h2>Lists</h2>
+          </div>
+
           <div className="list_buttons">
             {lists.map((m) => {
               return (
@@ -257,23 +263,28 @@ function List() {
           </div>
         </div>
 
-        <div className="listsave_div">
-          <h2>Save List</h2>
-          <input
-            type="text"
-            placeholder="List Name"
-            className={currentList.length > 0 ? "saveinput" : "nosaveinput"}
-            onChange={(e) => {
-              setListName(e.target.value);
-            }}
-          />
-          <button
-            className={currentList.length > 0 ? "save" : "nosave"}
-            onClick={saveList}
-          >
-            Save list
-          </button>
-          <button className="logout_button">Log Out</button>
+        <div className="savelist_div">
+          <div className="heading_div">
+            <h2>Save List</h2>
+          </div>
+
+          <div className="listsave_div">
+            <input
+              type="text"
+              placeholder="List Name"
+              className={currentList.length > 0 ? "saveinput" : "nosaveinput"}
+              onChange={(e) => {
+                setListName(e.target.value);
+              }}
+            />
+            <button
+              className={currentList.length > 0 ? "save" : "nosave"}
+              onClick={saveList}
+            >
+              Save list
+            </button>
+            <button className="logout_button">Log Out</button>
+          </div>
         </div>
       </div>
     </div>
