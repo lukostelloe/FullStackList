@@ -38,7 +38,7 @@ function List() {
     });
   }, []);
 
-  //ADD ITEM TO LIST
+  //ADD ITEM TO LIST (ELEMENT)
   const addToList = async () => {
     try {
       const response = await Axios.post("http://localhost:3001/insert", {

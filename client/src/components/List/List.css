@@ -8,13 +8,13 @@
 
   background-image: url(../images/listpage.jpg);
   background-size: cover;
+  overflow: auto;
 }
 
 .window {
   display: flex;
   flex-direction: row;
   align-items: center;
-
   height: 100vh;
 }
 
@@ -263,7 +263,11 @@ button:active {
   height: 20px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1075px) {
+  .full_app {
+    background-size: cover;
+    overflow: auto;
+  }
   .entry_and_form {
     display: flex;
     flex-direction: column;
