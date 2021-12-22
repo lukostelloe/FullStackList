@@ -45,3 +45,12 @@ input {
 li {
   list-style-type: none;
 }
+
+.account {
+  display: block;
+  color: green;
+}
+
+.noaccount {
+  display: none;
+}

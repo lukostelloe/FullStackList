@@ -9,6 +9,7 @@ function Createacc() {
   const [confpass, setconfpass] = useState("");
   const [userlist, setuserlist] = useState([]);
   const [warning, setwarning] = useState(false);
+  const [account, setAccount] = useState(false);
 
   const validPass = new RegExp(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9]).+$/);
 
@@ -29,6 +30,7 @@ function Createacc() {
             }
           );
           setuserlist([...userlist, response.data]);
+          setAccount(true);
           console.log("account created!");
         } catch (error) {
           console.log("there is an error with addToList function");
@@ -52,13 +54,13 @@ function Createacc() {
             onChange={(e) => setusername(e.target.value)}
           ></input>
           <input
-            type="text"
+            type="password"
             placeholder="password"
             value={password}
             onChange={(e) => setpassword(e.target.value)}
           ></input>
           <input
-            type="text"
+            type="password"
             placeholder="confirm password"
             value={confpass}
             onChange={(e) => setconfpass(e.target.value)}
@@ -72,6 +74,7 @@ function Createacc() {
           <Link to="/login">
             <li>Already have an account?</li>
           </Link>
+          <p className={account ? "account" : "noaccount"}>Account Created!</p>
         </form>
       </div>
     </div>
