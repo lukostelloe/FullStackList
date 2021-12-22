@@ -9,7 +9,7 @@ import Login from "./components/Login/Login";
 import Createacc from "./components/Createacc/Createacc";
 
 function App() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState("nologin");
 
   return (
     <Router>
