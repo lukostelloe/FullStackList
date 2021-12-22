@@ -1,16 +1,19 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
+// import { Context } from "../Context/Context";
 import "./Login.css";
 import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
+import { UserContext } from "../UserContext/UserContext";
 
 function Login() {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   // const [userdetails, setUserDetails] = useState("");
+  // const [context, setContext] = useContext(Context);
   const [warning, setwarning] = useState(false);
   let history = useHistory();
 
-  // console.log({ userdetails });
+  const { value, setValue } = useContext(UserContext);
 
   const submitLoginForm = async (e) => {
     e.preventDefault();
@@ -25,6 +28,7 @@ function Login() {
       response.data.username === username &&
       response.data.password === password
     ) {
+      setValue(username);
       history.push("/list");
     } else {
       console.log("no match at all");

@@ -1,4 +1,6 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { UserContext } from "../UserContext/UserContext";
 import "./List.css";
 
 import Modal from "../Modal/Modal";
@@ -23,11 +25,15 @@ function List() {
   const [lists, setLists] = useState([]);
   // const [listitems, setListItems] = useState([""]);
 
+  let history = useHistory();
+
+  const { value, setValue } = useContext(UserContext);
+
   //READ ITEMS DB ON PAGE RENDER
   useEffect(() => {
     Axios.get("http://localhost:3001/read").then((response) => {
-      setCurrentList(response.data);
       console.log(response.data);
+      setCurrentList(response.data);
     });
   }, []);
 
@@ -119,8 +125,13 @@ function List() {
     }
   };
 
+  const logoutFunction = () => {
+    history.push("/login");
+  };
+
   return (
     <div className="full_app">
+      <div>Welcome, {value}!</div>
       <div className="window">
         <div className="items_div">
           <div className="heading_div">
@@ -283,7 +294,9 @@ function List() {
             >
               Save list
             </button>
-            <button className="logout_button">Log Out</button>
+            <button className="logout_button" onClick={logoutFunction}>
+              Log Out
+            </button>
           </div>
         </div>
       </div>
