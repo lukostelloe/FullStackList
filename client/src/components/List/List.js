@@ -134,7 +134,9 @@ function List() {
   } else {
     return (
       <div className="full_app">
-        <div>Welcome, {value}!</div>
+        <div className="welcome-line">
+          <h2>Welcome, {value}!</h2>
+        </div>
         <div className="window">
           <div className="items_div">
             <div className="heading_div">

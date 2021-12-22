@@ -11,6 +11,10 @@
   overflow: auto;
 }
 
+.welcome-line {
+  padding: 20px;
+}
+
 .window {
   display: flex;
   flex-direction: row;
@@ -271,6 +275,12 @@ button:active {
     background-size: cover;
     overflow: auto;
   }
+
+  .welcome-line {
+    padding: 20px;
+    padding-top: 100px;
+  }
+
   .entry_and_form {
     display: flex;
     flex-direction: column;
