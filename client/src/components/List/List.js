@@ -235,7 +235,7 @@ function List() {
                             </button>
                             <input
                               type="number"
-                              placeholder="change number"
+                              placeholder="edit quantity"
                               onChange={(e) => {
                                 setnewnumber(e.target.value);
                               }}
