@@ -1,9 +1,10 @@
+import "./Login.css";
+
 import { React, useState, useContext } from "react";
 // import { Context } from "../Context/Context";
-import "./Login.css";
 import { Link, useHistory } from "react-router-dom";
-import Axios from "axios";
 import { UserContext } from "../UserContext/UserContext";
+import Axios from "axios";
 
 function Login() {
   const [username, setusername] = useState("");
@@ -15,6 +16,7 @@ function Login() {
 
   const { value, setValue } = useContext(UserContext);
 
+  //read the value of the existing users in the database, check for a match, if successful, log the user in and send them to list page
   const submitLoginForm = async (e) => {
     e.preventDefault();
     const username = e.target.elements.username.value;

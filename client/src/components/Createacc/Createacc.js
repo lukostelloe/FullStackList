@@ -1,6 +1,8 @@
-import { React, useState } from "react";
 import "./Createacc.css";
+
+import { React, useState } from "react";
 import { Link } from "react-router-dom";
+
 import Axios from "axios";
 
 function Createacc() {
@@ -11,13 +13,17 @@ function Createacc() {
   const [warning, setwarning] = useState(false);
   const [account, setAccount] = useState(false);
 
+  //creating a regex that requires a lowercase letter, uppercase letter, and number
+
   const validPass = new RegExp(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9]).+$/);
 
   const addToList = async () => {
+    //if the password does not meet regex requirements...
     if (!validPass.test(password)) {
       console.log("password not right");
       setwarning(true);
     } else {
+      //if match requirements, insert the username and password into the database
       console.log("nice password");
       setwarning(false);
       if (password === confpass) {

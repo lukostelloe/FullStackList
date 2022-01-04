@@ -1,11 +1,14 @@
+import "./Dashboard.css";
+
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import "./Dashboard.css";
 import { Link } from "react-router-dom";
 
 function Dashboard() {
   const [currentList, setCurrentList] = useState([]);
   const [items, setItems] = useState([]);
+
+  //when the page loads, read the items and display them on the page
   useEffect(() => {
     Axios.get("http://localhost:3001/read").then((response) => {
       setItems(response.data);
@@ -13,14 +16,13 @@ function Dashboard() {
     });
   }, []);
 
+  //when the page loads, read the lists and display them on the page
   useEffect(() => {
     Axios.get("http://localhost:3001/readlist").then((response) => {
       console.log(response.data);
       setCurrentList(response.data);
     });
   }, []);
-
-  console.log(currentList);
 
   return (
     <div className="dashboard">

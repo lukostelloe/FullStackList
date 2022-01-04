@@ -1,8 +1,11 @@
+//import main css folder, react, and react hooks
+
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import React, { useState } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { UserContext } from "./components/UserContext/UserContext.js";
 
+//import components
 import Navbar from "./components/Navbar/Navbar";
 import List from "./components/List/List";
 import Login from "./components/Login/Login";

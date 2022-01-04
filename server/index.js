@@ -10,7 +10,7 @@ const listModel = require("./models/List");
 app.use(express.json());
 app.use(cors());
 
-//CONNECT TO THE DB
+//connect to the database, a username and password is inserted into the address
 mongoose.connect(
   "mongodb+srv://lukostelloe:12rudimental@cluster0.w2vqg.mongodb.net/test",
   {
@@ -18,7 +18,7 @@ mongoose.connect(
   }
 );
 
-//GET LISTS
+//get lists
 app.get("/lists", async (req, res) => {
   const { user_id } = req.body;
 
@@ -35,7 +35,7 @@ app.get("/lists", async (req, res) => {
   }
 });
 
-//GET ITEMS
+//get items
 app.get("/items", async (req, res) => {
   const { list_id } = req.body;
 
@@ -47,7 +47,7 @@ app.get("/items", async (req, res) => {
   }
 });
 
-//CREATE ITEM
+//create item
 app.post("/insert", async (req, res) => {
   const numbers = req.body.number;
   const items = req.body.item;
@@ -62,7 +62,7 @@ app.post("/insert", async (req, res) => {
   }
 });
 
-//CREATE LIST
+//create list
 app.post("/insertlist", async (req, res) => {
   const listnames = req.body.listname;
   const listitems = req.body.items;
@@ -80,7 +80,7 @@ app.post("/insertlist", async (req, res) => {
   }
 });
 
-//CREATE LOGIN
+//create login
 app.post("/insertuser", async (req, res) => {
   const users = req.body.username;
   const passwords = req.body.password;
@@ -98,7 +98,7 @@ app.post("/insertuser", async (req, res) => {
   }
 });
 
-//READ
+//read
 app.get("/read", async (req, res) => {
   itemModel.find({}, (err, result) => {
     if (err) {
@@ -117,7 +117,7 @@ app.get("/readlist", async (req, res) => {
   });
 });
 
-//CHECK USERNAME AND PASSWORD FOR LOGIN
+//check username and password for login
 app.get("/readuser", async (req, res) => {
   const { username, password } = req.query;
 
@@ -139,7 +139,7 @@ app.get("/readuser", async (req, res) => {
   );
 });
 
-//UPDATE ITEM
+//update item
 app.put("/updateitem", async (req, res) => {
   const newitem = req.body.newitem;
   const id = req.body.id;
@@ -155,7 +155,7 @@ app.put("/updateitem", async (req, res) => {
   }
 });
 
-//UPDATE NUMBER
+//update number
 app.put("/updatenumber", async (req, res) => {
   const newnumber = req.body.newnumber;
   const id = req.body.id;
@@ -171,7 +171,7 @@ app.put("/updatenumber", async (req, res) => {
   }
 });
 
-//DELETE ITEM
+//delete item
 app.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
 
@@ -179,7 +179,7 @@ app.delete("/delete/:id", async (req, res) => {
   res.send("deleted");
 });
 
-//DELETE LIST
+//delete list
 app.delete("/deletelist/:id", async (req, res) => {
   const id = req.params.id;
 
@@ -187,7 +187,7 @@ app.delete("/deletelist/:id", async (req, res) => {
   res.send("deleted");
 });
 
-//ASSIGN THE SERVER TO AN ADDRESS
+//assign the server to an address
 app.listen(3001, () => {
   console.log("server running on port 3001");
 });

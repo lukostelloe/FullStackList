@@ -29,7 +29,7 @@ function List() {
 
   const { value, setValue } = useContext(UserContext);
 
-  //READ ITEMS DB ON PAGE RENDER
+  //read items database on page render, and display on page
   useEffect(() => {
     Axios.get("http://localhost:3001/read").then((response) => {
       console.log(response.data);
@@ -37,6 +37,7 @@ function List() {
     });
   }, []);
 
+  //read lists database on page render, and display on page
   useEffect(() => {
     Axios.get("http://localhost:3001/readlist").then((response) => {
       console.log(response.data);
@@ -44,7 +45,7 @@ function List() {
     });
   }, []);
 
-  //ADD ITEM TO LIST (ELEMENT)
+  //add item (element) to list
   const addToList = async () => {
     try {
       const response = await Axios.post("http://localhost:3001/insert", {
@@ -57,7 +58,7 @@ function List() {
     }
   };
 
-  //SAVE LIST
+  //save list
   const saveList = async () => {
     console.log(listname);
     console.log(currentList);
@@ -72,7 +73,7 @@ function List() {
     }
   };
 
-  //UPDATE ITEM
+  //update item
   const updateItem = async (id) => {
     try {
       const response = await Axios.put("http://localhost:3001/updateitem", {
@@ -87,7 +88,7 @@ function List() {
     window.location.reload();
   };
 
-  //UPDATE NUMBER
+  //update number
   const updateNumber = (id) => {
     Axios.put("http://localhost:3001/updatenumber", {
       id: id,
@@ -96,7 +97,7 @@ function List() {
     window.location.reload();
   };
 
-  //DELETE ITEM
+  //delete item
   const deleteId = async (id) => {
     try {
       await Axios.delete(`http://localhost:3001/delete/${id}`);
@@ -106,7 +107,7 @@ function List() {
     window.location.reload();
   };
 
-  //DELETE LIST
+  //delete list
   const deleteList = async (id) => {
     try {
       await Axios.delete(`http://localhost:3001/deletelist/${id}`);
@@ -116,7 +117,7 @@ function List() {
     window.location.reload();
   };
 
-  //CROSS OUT ITEMS IN THE LIST
+  //cross out items in the list
   const toggleTickOnOff = (e) => {
     if (e.target.className === "tickbuttonOn") {
       e.target.className = "tickbuttonOff";
@@ -125,10 +126,12 @@ function List() {
     }
   };
 
+  //logout button onClick, send the user back to the login page
   const logoutFunction = () => {
     history.push("/login");
   };
 
+  //conditional render, if there is a login value the site is accessible, otherwise there is an alert to log in
   if (value === "nologin") {
     return <div>You must log in to use the app!</div>;
   } else {
