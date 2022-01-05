@@ -35,6 +35,7 @@ function Createacc() {
               password: password,
             }
           );
+          //set the existing users to this list and set an account being activated to true
           setuserlist([...userlist, response.data]);
           setAccount(true);
           console.log("account created!");
@@ -80,6 +81,7 @@ function Createacc() {
           <Link to="/login">
             <li>Already have an account?</li>
           </Link>
+          {/* conditional render, if an account has been created, or if it hasnt (setAccount(true) or setAccount(false)) */}
           <p className={account ? "account" : "noaccount"}>Account Created!</p>
         </form>
       </div>

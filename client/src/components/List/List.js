@@ -32,7 +32,6 @@ function List() {
   //read items database on page render, and display on page
   useEffect(() => {
     Axios.get("http://localhost:3001/read").then((response) => {
-      console.log(response.data);
       setCurrentList(response.data);
     });
   }, []);
@@ -40,7 +39,6 @@ function List() {
   //read lists database on page render, and display on page
   useEffect(() => {
     Axios.get("http://localhost:3001/readlist").then((response) => {
-      console.log(response.data);
       setLists(response.data);
     });
   }, []);
@@ -60,14 +58,11 @@ function List() {
 
   //save list
   const saveList = async () => {
-    console.log(listname);
-    console.log(currentList);
     try {
       const response = await Axios.post("http://localhost:3001/insertlist", {
         listname: listname,
         items: currentList,
       });
-      console.log(response.data);
       setLists([...lists, response.data]);
     } catch (error) {
       console.log("there is an error with saveList function");
@@ -81,29 +76,36 @@ function List() {
         id: id,
         newitem: newitem,
       });
-      console.log(response.data);
       setnewitem([response.data]);
+      Axios.get("http://localhost:3001/read").then((response) => {
+        setCurrentList(response.data);
+      });
     } catch (error) {
       console.log("there is an error with updateitem function");
     }
-    window.location.reload();
   };
 
-  //update number
-  const updateNumber = (id) => {
-    Axios.put("http://localhost:3001/updatenumber", {
-      id: id,
-      newnumber: newnumber,
-    });
-    window.location.reload();
+  //new update number
+  const updateNumber = async (id) => {
+    try {
+      const response = await Axios.put("http://localhost:3001/updatenumber", {
+        id: id,
+        newnumber: newnumber,
+      });
+      setnewnumber([response.data]);
+      Axios.get("http://localhost:3001/read").then((response) => {
+        setCurrentList(response.data);
+      });
+    } catch (error) {
+      console.log("there is an error with updateitem function");
+    }
   };
 
-  //delete item
+  // delete item;
   const deleteId = async (id) => {
     try {
       await Axios.delete(`http://localhost:3001/delete/${id}`);
       Axios.get("http://localhost:3001/read").then((response) => {
-        console.log(response.data);
         setCurrentList(response.data);
       });
     } catch (error) {
@@ -116,11 +118,10 @@ function List() {
     try {
       await Axios.delete(`http://localhost:3001/deletelist/${id}`);
       Axios.get("http://localhost:3001/readlist").then((response) => {
-        console.log(response.data);
         setLists(response.data);
       });
     } catch (error) {
-      console.log("there is an error with delete function");
+      console.log("there is an error with delete list function");
     }
   };
 
