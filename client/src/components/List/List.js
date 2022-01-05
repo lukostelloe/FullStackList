@@ -68,6 +68,7 @@ function List() {
         items: currentList,
       });
       console.log(response.data);
+      setLists([...lists, response.data]);
     } catch (error) {
       console.log("there is an error with saveList function");
     }
@@ -101,20 +102,26 @@ function List() {
   const deleteId = async (id) => {
     try {
       await Axios.delete(`http://localhost:3001/delete/${id}`);
+      Axios.get("http://localhost:3001/read").then((response) => {
+        console.log(response.data);
+        setCurrentList(response.data);
+      });
     } catch (error) {
       console.log("there is an error with delete function");
     }
-    window.location.reload();
   };
 
   //delete list
   const deleteList = async (id) => {
     try {
       await Axios.delete(`http://localhost:3001/deletelist/${id}`);
+      Axios.get("http://localhost:3001/readlist").then((response) => {
+        console.log(response.data);
+        setLists(response.data);
+      });
     } catch (error) {
       console.log("there is an error with delete function");
     }
-    window.location.reload();
   };
 
   //cross out items in the list
@@ -133,7 +140,12 @@ function List() {
 
   //conditional render, if there is a login value the site is accessible, otherwise there is an alert to log in
   if (value === "nologin") {
-    return <div>You must log in to use the app!</div>;
+    return (
+      <div>
+        You must log in to use the app!{" "}
+        <button onClick={logoutFunction}>Log In</button>
+      </div>
+    );
   } else {
     return (
       <div className="full_app">
