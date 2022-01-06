@@ -3,11 +3,14 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
 
+//importing models
 const userModel = require("./models/User");
 const itemModel = require("./models/Item");
 const listModel = require("./models/List");
 
+//recognise incoming Request Objects as JSON
 app.use(express.json());
+//enable the express server to respond to preflight requests
 app.use(cors());
 
 //connect to the database, a username and password is inserted into the address
@@ -17,6 +20,11 @@ mongoose.connect(
     useNewUrlParser: true,
   }
 );
+
+//assign the server to an address
+app.listen(3001, () => {
+  console.log("server running on port 3001");
+});
 
 //get lists
 app.get("/lists", async (req, res) => {
@@ -193,9 +201,4 @@ app.delete("/deletelist/:id", async (req, res) => {
 
   await listModel.findByIdAndDelete(id).exec();
   res.send("deleted");
-});
-
-//assign the server to an address
-app.listen(3001, () => {
-  console.log("server running on port 3001");
 });
