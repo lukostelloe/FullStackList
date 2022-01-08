@@ -1,7 +1,6 @@
 import "./Login.css";
 
 import { React, useState, useContext } from "react";
-// import { Context } from "../Context/Context";
 import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../UserContext/UserContext";
 import Axios from "axios";
@@ -9,11 +8,12 @@ import Axios from "axios";
 function Login() {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
-  // const [userdetails, setUserDetails] = useState("");
-  // const [context, setContext] = useContext(Context);
   const [warning, setwarning] = useState(false);
+
+  //useHistory allows us to navigate to another page
   let history = useHistory();
 
+  //place the value of the username into this context to use elsewhere
   const { value, setValue } = useContext(UserContext);
 
   //read the value of the existing users in the database, check for a match, if successful, log the user in and send them to list page

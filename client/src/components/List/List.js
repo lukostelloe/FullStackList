@@ -1,11 +1,13 @@
-import { React, useState, useEffect, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { UserContext } from "../UserContext/UserContext";
 import "./List.css";
+
+import { React, useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { UserContext } from "../UserContext/UserContext";
 
 import Modal from "../Modal/Modal";
 import Axios from "axios";
 
+//importing images for "edit" and "delete"
 import editimage from "../images/edit.png";
 import binimage from "../images/bin.png";
 
@@ -23,10 +25,11 @@ function List() {
   const [listname, setListName] = useState("");
 
   const [lists, setLists] = useState([]);
-  // const [listitems, setListItems] = useState([""]);
 
+  //useHistory allows us to navigate to another page
   let history = useHistory();
 
+  //getting the value of the user from the UserContext component
   const { value, setValue } = useContext(UserContext);
 
   //read items database on page render, and display on page

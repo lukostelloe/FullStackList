@@ -26,32 +26,37 @@ app.listen(3001, () => {
   console.log("server running on port 3001");
 });
 
-//get lists
-app.get("/lists", async (req, res) => {
-  const { user_id } = req.body;
+//get items
+app.get("/items", async (req, res) => {
+  const { item_id } = req.body;
 
-  if (!user_id) {
+  if (!item_id) {
     return res.send("Error!");
   }
 
   try {
-    const results = await List.find({ user_id });
+    const results = await Item.find({ item_id });
+
+    return res.send(results);
+  } catch (error) {
+    res.send(error);
+  }
+});
+
+//get lists
+app.get("/lists", async (req, res) => {
+  const { list_id } = req.body;
+
+  if (!list_id) {
+    return res.send("Error!");
+  }
+
+  try {
+    const results = await List.find({ list_id });
 
     return res.send(results);
   } catch (error) {
     return res.send(error);
-  }
-});
-
-//get items
-app.get("/items", async (req, res) => {
-  const { list_id } = req.body;
-
-  try {
-    const results = await Item.find({ list_id });
-    return res.send(results);
-  } catch (error) {
-    res.send(error);
   }
 });
 
@@ -187,7 +192,7 @@ app.delete("/delete/:id", async (req, res) => {
   res.send("deleted");
 });
 
-// delete item from list
+// delete item from list, needs to be fixed
 app.delete("/deletefromlist/:id", async (req, res) => {
   const id = req.params.id;
 

@@ -14,7 +14,6 @@ function Createacc() {
   const [account, setAccount] = useState(false);
 
   //creating a regex that requires a lowercase letter, uppercase letter, and number
-
   const validPass = new RegExp(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9]).+$/);
 
   const addToList = async () => {
