@@ -1,8 +1,8 @@
 import "./Login.css";
 
-import { React, useState, useContext } from "react";
+import { React, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { UserContext } from "../UserContext/UserContext";
+import { useUser } from "../UserContext/UserContext";
 import Axios from "axios";
 
 function Login() {
@@ -14,7 +14,7 @@ function Login() {
   let history = useHistory();
 
   //place the value of the username into this context to use elsewhere
-  const { value, setValue } = useContext(UserContext);
+  const { setUser } = useUser();
 
   //read the value of the existing users in the database, check for a match, if successful, log the user in and send them to list page
   const submitLoginForm = async (e) => {
@@ -30,7 +30,7 @@ function Login() {
       response.data.username === username &&
       response.data.password === password
     ) {
-      setValue(username);
+      setUser(username);
       history.push("/list");
     } else {
       console.log("no match at all");

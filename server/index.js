@@ -188,15 +188,32 @@ app.put("/updatenumber", async (req, res) => {
 app.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
 
+  // Two options to solve this issue;
+
+  // 1. Instead of storing an array of objects in the items property on a list instead store an array of strings containing the item IDs
+  // when you get a list build an array of objects for the items by querying the item collection on the fly.
+
+  // when deleting an item also delete that ID string from the list items array
+
+  // 2. Keep the current schema i.e. items cofntaining array of objects, but when deleting an item also loop trough the list items array to find
+  // corresponding item and delete that item and update the list
+
+  // For both options you will need to delete all list items that are insiode the items array on the list object
+
+  // when you add an item to a list make sure to add the list id to that item e.g. list_id: "123123123"
+
+  const item = itemModel.findById(id);
+
+  if (item.list_id) {
+    await listModel.findOneAndUpdate(
+      { _id: listId },
+      { $pull: { items: { _id: id } } },
+      { safe: true, multi: false }
+    );
+  }
+
   await itemModel.findByIdAndDelete(id).exec();
-  res.send("deleted");
-});
 
-// delete item from list, needs to be fixed
-app.delete("/deletefromlist/:id", async (req, res) => {
-  const id = req.params.id;
-
-  await listModel.findByIdAndDelete({ id: item }).exec();
   res.send("deleted");
 });
 

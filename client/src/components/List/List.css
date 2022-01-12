@@ -6,7 +6,7 @@
 
   height: 100vh;
 
-  background-image: url(../images/listpage.jpg);
+  background-image: url(../images/listopaque75.jpg);
   background-size: cover;
   overflow: auto;
 }
@@ -36,7 +36,7 @@
   padding: 20px;
 
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255);
 
   overflow: scroll;
   overflow-x: hidden;
@@ -338,7 +338,7 @@ button:active {
   margin: 10px;
   padding: 20px;
 
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255);
   border-radius: 10px;
 
   overflow: scroll;
@@ -377,7 +377,7 @@ button:active {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255);
   border-radius: 10px;
 }
 
@@ -395,7 +395,7 @@ button:active {
   padding-left: 20px;
   padding-right: 20px;
   border-radius: 10px;
-  background-color: rgba(112, 246, 251, 0.8);
+  background-color: rgba(112, 246, 251);
 }
 
 .savelist_div {
