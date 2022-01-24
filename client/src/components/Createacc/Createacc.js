@@ -72,7 +72,7 @@ function Createacc() {
             onChange={(e) => setconfpass(e.target.value)}
           ></input>
           <p className={warning ? "nopass" : "pass"}>
-            password must contain upper, lower and number
+            password must contain uppercase, lowercase and number
           </p>
           <button type="button" onClick={addToList}>
             Create Account

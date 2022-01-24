@@ -5,6 +5,7 @@ import { UserProvider } from "./components/UserContext/UserContext.js";
 
 //import components
 import Routes from "./Routes";
+import Example from "./components/Exampleforpres/Example";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <UserProvider>
         <Routes />
       </UserProvider>
+      {/* <Example /> */}
     </div>
   );
 }
