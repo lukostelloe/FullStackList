@@ -16,7 +16,7 @@ app.use(cors());
 
 //connect to the database, a username and password is inserted into the address
 mongoose.connect(
-  "mongodb+srv://lukostelloe:12rudimental@cluster0.w2vqg.mongodb.net/test",
+  "mongodb+srv://{username}:{password}@cluster0.w2vqg.mongodb.net/test",
   {
     useNewUrlParser: true,
   }
